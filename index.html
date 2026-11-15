@@ -1432,7 +1432,7 @@ function renderShort(){
         <div class="qmeta"><span class="tag">Official mark scheme</span><span class="srctag">${esc(srcLabel(q.src))}</span><span class="spacer"></span><a class="srctag" href="${esc(q.msimg)}" target="_blank" rel="noopener">Full size</a></div>
         <p class="hint" style="margin:6px 0 10px">Screenshot of the published mark scheme, reproduced without edits.</p>
         <a class="mslink" href="${esc(q.msimg)}" target="_blank" rel="noopener">
-          <img class="msimg" src="${esc(q.msimg)}" alt="Official mark scheme for this question">
+          <img class="msimg" src="${esc(q.msimg)}" data-fb="${esc(String(q.msimg).split('/').pop())}" onerror="if(this.dataset.fb&&!this.dataset.tried){this.dataset.tried='1';this.src=this.dataset.fb}" alt="Official mark scheme for this question">
         </a>
         <div class="row" style="margin-top:12px">
           <label class="selfmark">Your mark <input id="sm" type="number" min="0" max="${total}" step="1" value="${got || ''}"></label>
