@@ -54,4 +54,3 @@ publish anything; nothing you import is uploaded anywhere.
   anon key in the app's backend dialog.
 - Typefaces load from a CDN; if that host is unreachable the page falls back to system serif/sans stacks.
 
-> （注：部分内容由豆包 AI 生成）
