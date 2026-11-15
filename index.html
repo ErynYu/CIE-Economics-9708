@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9708 Economics — Knowledge Self-Check</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230F6B52'/%3E%3Cpath d='M9 8h9a4 4 0 014 4v12H13a4 4 0 00-4 4V8z' fill='%23FBFAF6'/%3E%3Cpath d='M13 13h6M13 17h5' stroke='%230F6B52' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Source+Serif+4:opsz,wght@8..60,400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --paper:#FBFAF6; --card:#FFFFFF; --ink:#171F1C; --muted:#6C7A73;
+  --line:#E4E0D5; --green:#0F6B52; --green-soft:#E9F2EE; --amber:#A9762F; --amber-soft:#FAF1E1;
+  --red:#A83A2C; --red-soft:#FBEBE8; --shadow:0 1px 2px rgba(23,31,28,.05),0 12px 32px rgba(23,31,28,.05);
+  --serif:"Source Serif 4","Iowan Old Style",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:15px}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;font-size:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600}
+
+/* ---------- shell ---------- */
+.app{min-height:100vh}
+.rail{display:none}
+.col{min-width:0}
+main{padding:20px 18px 96px;max-width:940px;margin:0 auto}
+
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand svg{width:30px;height:30px;flex:none}
+.brand .bt{display:block;font-family:var(--serif);font-weight:700;font-size:16px;line-height:1.25;letter-spacing:.01em;white-space:nowrap}
+.brand .bs{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+
+.topbar{position:sticky;top:0;z-index:20;background:rgba(251,250,246,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:940px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 18px}
+.count{margin-left:auto;font-size:11.5px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.acct{display:flex;align-items:center}
+.acct button{font:inherit;font-size:11.5px;color:var(--green);background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 10px;display:flex;align-items:center;gap:6px;cursor:pointer}
+.acct button:hover{border-color:var(--green)}
+.acct .who{background:var(--green);color:#fff;border-color:var(--green)}
+.acct .who .r{opacity:.75;font-size:10.5px}
+.acct .gem{width:6px;height:6px;border-radius:50%;background:#C9C2AD}
+.acct .ga{background:#C9C2AD}
+.acct button{white-space:nowrap}
+@media (max-width:520px){
+  .topbar-in{gap:8px;padding:10px 14px}
+  .count{display:none}
+  .brand .bs{display:none}
+}
+
+/* tab bar: phone = fixed bottom; tablet = inline horizontal */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(251,250,246,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tabs-in{max-width:940px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 9px;font-size:10.5px;color:var(--muted)}
+.tab svg{width:19px;height:19px;stroke:var(--muted)}
+.tab.on{color:var(--green)}
+.tab.on svg{stroke:var(--green)}
+.tab .ln{display:none}
+.tab .sn{display:inline}
+.keyhint{display:none}
+.badge{font-size:9px;background:var(--green);color:#fff;border-radius:7px;padding:0 4px;line-height:14px;margin-left:3px;vertical-align:middle}
+
+/* ---------- type ---------- */
+.view-t{font-size:24px;line-height:1.25;margin:0 0 6px;letter-spacing:-.01em}
+.view-sub{font-size:13px;color:var(--muted);margin:0 0 18px;max-width:62ch}
+h3{font-size:15px;margin:0;letter-spacing:.01em}
+
+/* ---------- cards ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+.pad{padding:18px}
+
+/* ---------- home ---------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.stat b{display:block;font-family:var(--serif);font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.stat span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.modes{display:grid;grid-template-columns:1fr;gap:10px}
+.mode{display:block;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 15px;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+.mode:hover{border-color:#BFD8CC}
+.mode:active{transform:scale(.99)}
+.mode .mt{font-family:var(--serif);font-weight:600;font-size:16px;display:flex;align-items:center;gap:9px}
+.mode .mi{width:30px;height:30px;border-radius:8px;background:var(--green-soft);display:grid;place-items:center;flex:none}
+.mode .mi svg{width:17px;height:17px;stroke:var(--green)}
+.mode .md{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}
+.sect-h{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 8px;gap:10px}
+.sect-h small{font-size:11px;color:var(--muted)}
+.chapters3{display:grid;gap:0 24px}
+.chap{display:flex;align-items:center;gap:10px;min-width:0;padding:7px 0;border-bottom:1px dashed var(--line)}
+.chap:last-child{border-bottom:0}
+.chap .cname{font-size:12px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chap .cbar{width:64px;height:4px;background:#EFEBE0;border-radius:4px;flex:none;overflow:hidden}
+.chap .cbar i{display:block;height:100%;background:var(--green);border-radius:4px}
+.chap .cnum{font-size:11px;color:var(--muted);width:38px;text-align:right;font-variant-numeric:tabular-nums}
+.note{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:16px;padding:13px 14px;border:1px dashed var(--line);border-radius:11px;background:#FDFCF7}
+
+/* ---------- chips / progress ---------- */
+.chips{display:flex;gap:7px;overflow-x:auto;padding:0 18px 12px 0;margin-right:-18px;scrollbar-width:none;flex-wrap:nowrap}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:12px;padding:6px 11px;border-radius:18px;border:1px solid var(--line);background:#fff;color:var(--muted);white-space:nowrap}
+.chip:hover{border-color:#BFD8CC}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.filterbar{display:flex;align-items:center;gap:9px;margin:0 0 12px;flex-wrap:nowrap}
+.filterbar label{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.filterbar select{width:auto;max-width:300px;min-width:120px;flex:0 1 300px}
+.study{display:block}
+.side{display:none}
+.side-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+.side-h{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.side-row{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0}
+.side-row b{font-family:var(--serif);font-size:14px}
+.side-bar{height:4px;background:#EFEBE0;border-radius:4px;overflow:hidden;margin-top:8px}
+.side-bar i{display:block;height:100%;background:var(--green)}
+.side-tips p{font-size:12.5px;line-height:1.6;color:#3B4741;margin:0 0 9px}
+.side-tips p:last-child{margin-bottom:0}
+.pbar{height:3px;background:#EAE6DA;border-radius:4px;overflow:hidden;margin:0 0 16px}
+.pbar i{display:block;height:100%;background:var(--green);transition:width .25s}
+
+/* ---------- question ---------- */
+.qmeta{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.tag{font-size:10.5px;padding:2px 8px;border-radius:5px;background:var(--green-soft);color:var(--green);letter-spacing:.03em}
+.qimg{display:block;max-width:100%;height:auto;margin:12px 0 6px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:6px}
+.srctag{font-family:var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);font-size:10.5px;letter-spacing:.02em;color:#8A8578;background:#F4F1E7;border:1px solid #E4DFD0;border-radius:5px;padding:2px 6px}
+.tag.amber{background:var(--amber-soft);color:var(--amber)}
+.qtext{font-family:var(--serif);font-size:18px;line-height:1.65;margin:0 0 16px}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px;line-height:1.55;transition:background .12s,border-color .12s}
+.opt:hover{border-color:#C7DAD0;background:#FCFDFB}
+.opt .k{width:21px;height:21px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--muted);flex:none;margin-top:1px}
+.opt.good{background:var(--green-soft);border-color:#A9CDBC}
+.opt.good .k{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad{background:var(--red-soft);border-color:#E2B4AC}
+.opt.bad .k{background:var(--red);color:#fff;border-color:var(--red)}
+.opt[disabled]{opacity:1;cursor:default}
+.fb{margin-top:16px;border-radius:11px;padding:14px 15px;font-size:13.5px;line-height:1.65;background:var(--green-soft);border:1px solid #BFD9CC}
+.fb.bad{background:var(--red-soft);border-color:#E2B4AC}
+.fb .fbt{font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.fb .fbt.ok{color:var(--green)}
+.fb .fbt.no{color:var(--red)}
+
+.row{display:flex;gap:9px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.btn{padding:10px 18px;border-radius:9px;font-size:13.5px;font-weight:500;border:1px solid var(--line);background:#fff;transition:background .12s,border-color .12s;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn svg{width:15px;height:15px;flex:none}
+.btn:hover{border-color:#C7DAD0}
+.btn.primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn.primary:hover{background:#0C5B45}
+.btn.ghost{color:var(--muted)}
+.btn.sm{padding:7px 12px;font-size:12px;border-radius:7px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.spacer{flex:1}
+.hint{font-size:11.5px;color:var(--muted)}
+.kbd{font-family:var(--sans);font-size:10.5px;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:1px 5px;color:var(--muted);background:#fff}
+
+/* ---------- flashcards ---------- */
+.flipwrap{perspective:1600px;margin:4px 0 12px}
+.flip{position:relative;min-height:264px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.1,.2,1);cursor:pointer}
+.flip.on{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:var(--shadow);padding:26px 24px;display:flex;flex-direction:column;justify-content:center}
+.face.back{transform:rotateY(180deg);background:#FDFCF8}
+.face .fl{font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+.face .fw{font-family:var(--serif);font-size:26px;line-height:1.35;font-weight:600;word-break:break-word}
+.face .fd{font-size:14.5px;line-height:1.7;margin-top:6px}
+.face .fn{font-size:11.5px;color:var(--muted);margin-top:12px;border-top:1px dashed var(--line);padding-top:9px}
+.tapnote{text-align:center;font-size:11px;color:var(--muted);margin:2px 0 0}
+
+/* ---------- short answers ---------- */
+.sa-q{font-family:var(--serif);font-size:17px;line-height:1.6;margin:6px 0 14px}
+textarea{width:100%;min-height:130px;border:1px solid var(--line);border-radius:10px;padding:12px;font-family:var(--sans);font-size:14px;line-height:1.65;resize:vertical;background:#fff;color:var(--ink)}
+textarea:focus{outline:none;border-color:var(--green)}
+.model{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.model h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 6px;font-weight:600;font-family:var(--sans)}
+.model p{font-size:13.5px;line-height:1.75;margin:0 0 12px;color:#35423C}
+.pts{display:grid;gap:7px}
+.pt{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.55;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff}
+.pt input{width:16px;height:16px;accent-color:var(--green);margin:2px 0 0;flex:none}
+.pt .sc{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap}
+.score{font-size:12.5px;color:var(--muted)}
+.score b{color:var(--green);font-size:15px;font-family:var(--serif)}
+
+/* ---------- question bank ---------- */
+.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.tool{display:flex;align-items:center;gap:9px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:12.5px;text-align:left}
+.tool:hover{border-color:#C7DAD0}
+.tool svg{width:16px;height:16px;stroke:var(--green);flex:none}
+.searchrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.searchrow input{grid-column:1/-1}
+input[type=file]{width:100%;font-size:12.5px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:9px;padding:10px}
+input[type=file]::file-selector-button{margin-right:10px;padding:6px 12px;border:1px solid var(--line);border-radius:7px;background:var(--paper);font-family:inherit;font-size:12px;color:var(--ink)}
+input[type=text],input[type=search],select{border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-family:var(--sans);font-size:13px;background:#fff;color:var(--ink);width:100%}
+input:focus,select:focus{outline:none;border-color:var(--green)}
+.list{display:grid;gap:8px}
+.item{display:flex;gap:10px;align-items:flex-start;padding:12px 13px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.item:hover{border-color:#DCD6C7}
+.item .body{flex:1;min-width:0}
+.item .qt{font-size:13px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.item .mt{font-size:10.5px;color:var(--muted);margin-top:5px;display:flex;gap:8px;flex-wrap:wrap}
+.item .acts{display:flex;gap:4px;flex:none}
+.iconbtn{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;border:1px solid var(--line);background:#fff}
+.iconbtn:hover{border-color:#C7DAD0}
+.iconbtn svg{width:14px;height:14px;stroke:var(--muted)}
+.empty{padding:32px 18px;text-align:center;color:var(--muted);font-size:13px}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(23,31,28,.45);display:flex;align-items:flex-end;justify-content:center}
+.modal[hidden]{display:none}
+.sheet{background:var(--paper);width:100%;max-width:820px;max-height:92vh;overflow:auto;border-radius:16px 16px 0 0;padding:20px 18px 24px}
+.sheet h3{font-size:18px;margin:0 0 14px}
+.sheet textarea{min-height:84px}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;letter-spacing:.05em;text-transform:uppercase}
+.field input,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-family:var(--sans);font-size:14px;background:#fff;color:var(--ink)}
+
+.preview{margin:6px 0 4px;border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#fff}
+.pv{font-size:12.5px;line-height:1.5;padding:3px 0;color:#3B4741}
+.pv b{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-right:6px}
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(14px);bottom:78px;background:#171F1C;color:#FBF8F0;font-size:12.5px;padding:9px 16px;border-radius:20px;opacity:0;pointer-events:none;transition:.25s;z-index:90;max-width:88vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- tablet ---------- */
+@media (min-width:721px){
+  main{padding:28px 32px 80px;max-width:820px}
+  .topbar-in{padding:14px 32px;max-width:820px}
+  .tabs{position:sticky;top:0;border-top:0;border-bottom:1px solid var(--line);padding:0}
+  .chips{flex-wrap:wrap;overflow:visible;padding-right:0;margin-right:0}
+  .tabs-in{display:flex;gap:4px;padding:0 28px;max-width:820px}
+  .tab{flex-direction:row;gap:7px;padding:11px 14px;font-size:12.5px;border-bottom:2px solid transparent}
+  .tab .ln{display:inline}
+  .tab .sn{display:none}
+  .keyhint{display:inline}
+  .tab.on{border-bottom-color:var(--green)}
+  .tab svg{width:16px;height:16px}
+  .view-t{font-size:27px}
+  .stats{grid-template-columns:repeat(4,1fr);gap:12px}
+  .stat b{font-size:28px}
+  .modes{grid-template-columns:1fr 1fr}
+  .chapters3{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .tools{grid-template-columns:repeat(4,1fr)}
+  .searchrow{grid-template-columns:2fr 1fr 1fr}
+  .searchrow input{grid-column:auto}
+  .qtext{font-size:20px}
+  .opt{font-size:15px;padding:14px 16px}
+  .face .fw{font-size:30px}
+  .flip{min-height:320px}
+}
+/* ---------- desktop ---------- */
+@media (min-width:1060px){
+  .app{display:grid;grid-template-columns:268px minmax(0,1fr)}
+  .rail{display:flex;flex-direction:column;gap:24px;position:sticky;top:0;height:100vh;padding:30px 26px;
+    background:#F7F4EA;border-right:1px solid var(--line)}
+  .rail .brand{margin-bottom:6px}
+  .rail .brand .bt{font-size:18px}
+  .railnav{display:flex;flex-direction:column;gap:3px}
+  .railnav a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:13.5px;color:#3B4741}
+  .railnav a svg{width:17px;height:17px;stroke:var(--muted);flex:none}
+  .railnav a:hover{background:#EFEBDE}
+  .railnav a.on{background:var(--green);color:#fff}
+  .railnav a.on svg{stroke:#fff}
+  .railnav .rbadge{margin-left:auto;font-size:10.5px;color:var(--muted)}
+  .railnav a.on .rbadge{color:rgba(255,255,255,.8)}
+  .railfoot{margin-top:auto;font-size:11px;color:var(--muted);line-height:1.7;border-top:1px dashed var(--line);padding-top:14px}
+  .railfoot b{display:block;color:var(--ink);font-family:var(--serif);font-size:13px;margin-bottom:2px}
+  .topbar,.tabs{display:none}
+  main{padding:44px 56px 90px;max-width:980px;margin:0 auto}
+  .view-t{font-size:30px}
+  .chapters3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .study{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:24px;align-items:start}
+  .side{display:block;position:sticky;top:32px}
+  .modes{grid-template-columns:1fr 1fr}
+  .chap .cname{font-size:12px}
+  .chap{gap:8px}
+  .chap .cbar{width:44px}
+  .flip{min-height:330px}
+.chap .cname{font-size:11.5px}
+  .face{padding:34px 32px}
+  .face .fw{font-size:34px}
+  .list.two{grid-template-columns:1fr 1fr}
+  .sheet{border-radius:14px;margin:auto;max-height:86vh}
+  .modal{align-items:center;padding:24px}
+}
+@media (min-width:1420px){
+  main{max-width:1040px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0F6B52"/><path d="M9 8h9a4 4 0 014 4v12H13a4 4 0 00-4 4V8z" fill="#FBFAF6"/><path d="M13 13h6M13 17h5" stroke="#0F6B52" stroke-width="1.6"/></svg>
+      <div>
+        <span class="bt">9708 Self-Check</span>
+        <span class="bs">Economics AS · 2027 syllabus</span>
+      </div>
+    </div>
+    <nav class="railnav" id="railnav" aria-label="Sections"></nav>
+    <div class="railfoot" id="railfoot"></div>
+  </aside>
+
+  <div class="col">
+    <header class="topbar">
+      <div class="topbar-in">
+        <div class="brand">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0F6B52"/><path d="M9 8h9a4 4 0 014 4v12H13a4 4 0 00-4 4V8z" fill="#FBFAF6"/><path d="M13 13h6M13 17h5" stroke="#0F6B52" stroke-width="1.6"/></svg>
+          <div>
+            <span class="bt">9708 Self-Check</span>
+            <span class="bs">Economics AS</span>
+          </div>
+        </div>
+        <div class="count"><span class="dot"></span><span id="hd-count">Loading</span></div>
+        <div class="acct" id="acct"></div>
+      </div>
+    </header>
+    <nav class="tabs" aria-label="Sections"><div class="tabs-in" id="tabs"></div></nav>
+    <main id="view"></main>
+  </div>
+</div>
+<div class="modal" id="modal" hidden></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ===== Built-in bank · multiple choice (English) ===== */
+const BUILTIN_MCQ = [
+{id:'m01',type:'mcq',ch:'1.1',t:'Scarcity',q:'In economics, scarcity means that:',o:['resources are physically scarce in absolute terms','wants are unlimited while the resources to satisfy them are limited','prices are too high for consumers to afford the goods','supply happens to be short in a particular period'],a:1,e:'Scarcity is relative: unlimited wants against limited resources, which forces choices. High prices or a temporary shortage are symptoms, not the definition.'},
+{id:'m02',type:'mcq',ch:'1.1',t:'Opportunity cost',q:'Opportunity cost is:',o:['the money actually paid for a good','the value of the next best alternative forgone','the sum of the values of all alternatives forgone','a cost already incurred that cannot be recovered'],a:1,e:'Only the single next best alternative counts. The sum of all alternatives and sunk costs are excluded.'},
+{id:'m03',type:'mcq',ch:'1.1',t:'Basic questions',q:'Which of these is not one of the three basic questions of resource allocation?',o:['What to produce and how much','How to produce','For whom to produce','When to produce'],a:3,e:'The three questions are what, how and for whom. Timing is not one of them.'},
+{id:'m04',type:'mcq',ch:'1.1',t:'Sunk cost',q:'A student gives up a part-time job paying 15 yuan per hour to attend a class. The tuition fee was paid earlier and is non-refundable. The opportunity cost of attending this class is:',o:['the 15 yuan of hourly pay forgone','the 15 yuan plus the tuition fee','the tuition fee only','zero, because the fee has already been paid'],a:0,e:'The tuition fee is a sunk cost and does not enter this decision. Only the pay forgone counts.'},
+{id:'m05',type:'mcq',ch:'1.2',t:'Normative',q:'Which statement is normative?',o:['The unemployment rate was 5 per cent last year','The government should raise the minimum wage','Raising the minimum wage raises costs for firms','The CPI rose by 3 per cent year on year'],a:1,e:'Statements with should, ought or fair involve value judgements and cannot be tested directly with data.'},
+{id:'m06',type:'mcq',ch:'1.2',t:'Ceteris paribus',q:'The purpose of ceteris paribus in economics is to:',o:['make models more realistic','isolate one variable so that its separate effect can be observed','prove that a conclusion is always correct','replace the need for data'],a:1,e:'Holding other variables constant is a modelling device. It does not guarantee that the conclusion holds in reality.'},
+{id:'m07',type:'mcq',ch:'1.2',t:'Models',q:'Economists use simplified models rather than describing all of reality because:',o:['real-world data are always wrong','complex reality cannot be grasped directly, so simplification reveals key relationships','models may assume anything they like','governments require them'],a:1,e:'Abstraction highlights the key mechanism, at the cost of a limited scope of application.'},
+{id:'m08',type:'mcq',ch:'1.3',t:'Factor rewards',q:'The reward for capital is:',o:['rent','wages','interest','profit'],a:2,e:'Land earns rent, labour earns wages, capital earns interest and enterprise earns profit.'},
+{id:'m09',type:'mcq',ch:'1.3',t:'Human capital',q:'Government spending on education and training directly improves:',o:['the quantity of land','the quality of labour, that is human capital','the quantity of capital goods','risk-taking by entrepreneurs'],a:1,e:'Better skills raise productivity, which is a quality improvement in labour.'},
+{id:'m10',type:'mcq',ch:'1.3',t:'Division of labour',q:'A major disadvantage of division of labour is that:',o:['it lowers output per worker','production becomes dependent on single stages and vulnerable to disruption','it raises training costs beyond reach','it reduces total output'],a:1,e:'Specialisation raises efficiency but makes the process fragile, monotonous and dependent on each stage.'},
+{id:'m11',type:'mcq',ch:'1.4',t:'Price mechanism',q:'Which is not a function of the price mechanism?',o:['Signalling','Rationing','Incentive','Directly redistributing income'],a:3,e:'Prices signal, ration and incentivise. Redistribution requires taxes and transfers.'},
+{id:'m12',type:'mcq',ch:'1.4',t:'Mixed economy',q:'A mixed economy is one in which:',o:['only the private sector allocates resources','only the public sector allocates resources','resources are allocated by both the private and the public sector','there are no prices'],a:2,e:'Market allocation coexists with government provision, regulation and redistribution.'},
+{id:'m13',type:'mcq',ch:'1.5',t:'PPC',q:'Which change shifts a production possibility curve outwards?',o:['A fall in unemployment','More intensive use of existing resources','An increase in the quantity or quality of resources, or better technology','A change in consumer tastes'],a:2,e:'The curve shifts only when productive capacity itself expands. Reducing unemployment merely moves the economy from inside the curve onto it.'},
+{id:'m14',type:'mcq',ch:'1.5',t:'PPC shape',q:'A PPC that is concave to the origin shows:',o:['constant opportunity cost','increasing opportunity cost','decreasing opportunity cost','unlimited resources'],a:1,e:'Resources are not perfectly transferable, so each extra unit costs more of the other good.'},
+{id:'m15',type:'mcq',ch:'1.5',t:'PPC point',q:'A production combination inside the PPC indicates that:',o:['there has been technical progress','resources are unemployed or used inefficiently','opportunity cost is zero','maximum output has been reached'],a:1,e:'Inside the curve means idle or badly used resources; only points on the curve show full and efficient employment.'},
+{id:'m16',type:'mcq',ch:'1.5',t:'Capital goods',q:'If an economy devotes more resources to capital goods rather than consumer goods:',o:['consumption rises now and capacity is unchanged','consumption falls now but the PPC shifts outwards later','consumption falls now and capacity falls later','both rise'],a:1,e:'Capital goods are not consumed today but add to future capacity, which is the basis of growth.'},
+{id:'m17',type:'mcq',ch:'1.6',t:'Public good',q:'The two defining features of a public good are:',o:['rivalry and excludability','non-rivalry and non-excludability','low price and high quality','production by the government'],a:1,e:'One person consuming it does not reduce availability to others, and non-payers cannot be excluded.'},
+{id:'m18',type:'mcq',ch:'1.6',t:'Free rider',q:'Public goods are under-provided in a free market mainly because:',o:['production costs are too high','consumers can free-ride, so firms cannot recover their costs','the government bans production','demand is too small'],a:1,e:'Non-excludability means non-payers can also consume, so willingness to pay collapses.'},
+{id:'m19',type:'mcq',ch:'1.6',t:'Merit good',q:'A merit good is under-consumed in a free market mainly because:',o:['its price is too high','consumers underestimate its private benefits, an information failure','too much is produced','firms refuse to produce it'],a:1,e:'Underestimated benefits plus positive externalities mean the social optimum exceeds the market outcome.'},
+{id:'m20',type:'mcq',ch:'2.1',t:'Effective demand',q:'Demand requires:',o:['willingness and ability to buy','willingness only','ability only','advertising'],a:0,e:'Effective demand combines willingness with the ability to pay.'},
+{id:'m21',type:'mcq',ch:'2.1',t:'Demand shift',q:'Consumer income rises for a normal good. The demand curve will:',o:['move up along the curve','shift to the right','shift to the left','stay unchanged'],a:1,e:'Income is an external determinant, so the whole curve shifts. Only a change in the good own price moves along the curve.'},
+{id:'m22',type:'mcq',ch:'2.1',t:'Joint supply',q:'Beef prices rise and more cattle are reared. The supply of leather, a by-product, will:',o:['fall','rise','stay unchanged','rise then fall'],a:1,e:'In joint supply one production process yields both goods, so more beef means more leather and a lower leather price.'},
+{id:'m23',type:'mcq',ch:'2.2',t:'PED',q:'A good has PED of −2. If the firm raises price by 10 per cent, total revenue will:',o:['rise','fall','stay the same','cannot be determined'],a:1,e:'Demand is elastic, so quantity falls by about 20 per cent, more than the price rise, and revenue falls.'},
+{id:'m24',type:'mcq',ch:'2.2',t:'PED',q:'A perfectly inelastic demand curve is:',o:['horizontal','vertical','at 45 degrees','upward sloping'],a:1,e:'Quantity does not respond at all, so the curve is vertical and PED equals zero.'},
+{id:'m25',type:'mcq',ch:'2.2',t:'YED',q:'A good has YED of +2.5. If income falls by 10 per cent, quantity demanded will:',o:['rise by 25 per cent','fall by 25 per cent','fall by 2.5 per cent','not change'],a:1,e:'YED above one means a luxury good, so demand falls proportionally more than income.'},
+{id:'m26',type:'mcq',ch:'2.2',t:'XED',q:'A negative XED between two goods means they are:',o:['substitutes','complements','unrelated','the same good'],a:1,e:'A rise in the price of B reduces demand for A, so the two are used together.'},
+{id:'m27',type:'mcq',ch:'2.2',t:'Revenue effect',q:'A poor harvest reduces the supply of a farm product whose demand is inelastic. Farmers total revenue will usually:',o:['rise, because the price increase is larger than the fall in quantity','fall','stay unchanged','fall to zero'],a:0,e:'With inelastic demand, price rises sharply while quantity falls only slightly, so revenue rises. This explains the paradox of plenty.'},
+{id:'m28',type:'mcq',ch:'2.3',t:'PES',q:'The most important determinant of price elasticity of supply is:',o:['the length of the time period','the colour of the good','consumer income','advertising'],a:0,e:'In the short run capacity is fixed, so PES is low; over time firms can expand and enter, so PES rises.'},
+{id:'m29',type:'mcq',ch:'2.3',t:'PES',q:'A factory running at full capacity with very low stocks will have:',o:['high PES','low PES','PES equal to one','infinite PES'],a:1,e:'Without spare capacity or stock, a higher price cannot quickly raise output.'},
+{id:'m30',type:'mcq',ch:'2.4',t:'Shortage',q:'When the market price is below the equilibrium price, there will be:',o:['a surplus, so price falls','a shortage, so price rises','equilibrium','no trade at all'],a:1,e:'Quantity demanded exceeds quantity supplied and buyers bid the price up.'},
+{id:'m31',type:'mcq',ch:'2.4',t:'Equilibrium change',q:'If demand and supply both increase, then:',o:['quantity rises and price must rise','quantity rises but the price change is uncertain','both price and quantity rise','quantity must fall'],a:1,e:'Quantity must increase; price depends on which shift is larger.'},
+{id:'m32',type:'mcq',ch:'2.5',t:'Consumer surplus',q:'Consumer surplus is shown by the area:',o:['below the demand curve and above the market price','above the supply curve and below the price','between the two curves','under the axes'],a:0,e:'It is the difference between willingness to pay and the price actually paid.'},
+{id:'m33',type:'mcq',ch:'2.5',t:'Surplus',q:'If the price of a good rises, other things equal:',o:['consumer surplus rises and producer surplus falls','consumer surplus falls and producer surplus rises','both rise','both fall'],a:1,e:'Consumers pay more for less; producers receive more per unit and supply more.'},
+{id:'m34',type:'mcq',ch:'3.1',t:'Market failure',q:'Market failure means that:',o:['no trade takes place in the market','prices are too high','resources are allocated inefficiently and welfare is not maximised','firms make losses'],a:2,e:'The price mechanism fails to allocate resources at the social optimum.'},
+{id:'m35',type:'mcq',ch:'3.1',t:'Government failure',q:'Which is an example of government failure?',o:['A pollution tax reduces output','A subsidy causes overproduction and waste','Consumers change their tastes','Firms cut their prices'],a:1,e:'Intervention that worsens allocation, for example through distorted incentives or poor information, is government failure.'},
+{id:'m36',type:'mcq',ch:'3.1',t:'Rationale',q:'The strongest economic reason for subsidising education is that:',o:['education has no cost','education creates positive externalities and families underestimate its benefits','education is a pure public good','teachers are poorly paid'],a:1,e:'External benefits and information failure mean the market under-consumes education. Education is not a pure public good.'},
+{id:'m37',type:'mcq',ch:'3.2',t:'Tax types',q:'The difference between a specific tax and an ad valorem tax is that:',o:['the first is a fixed amount per unit, the second a percentage of price','the first is paid by consumers, the second by producers','the first applies only to imports','the first does not shift the supply curve'],a:0,e:'A specific tax shifts supply up by a constant amount; an ad valorem tax pivots the curve because the tax rises with price.'},
+{id:'m38',type:'mcq',ch:'3.2',t:'Tax incidence',q:'Demand for a good is perfectly inelastic and supply is elastic. With a specific tax, the burden falls mainly on:',o:['consumers, because demand is inelastic and the tax can be passed on almost fully','producers, because supply is elastic','the government','both sides equally'],a:0,e:'The less elastic side bears more of the tax. With inelastic demand, price rises almost by the full tax and quantity barely changes.'},
+{id:'m39',type:'mcq',ch:'3.2',t:'Maximum price',q:'A maximum price set below equilibrium is most likely to cause:',o:['a surplus','a shortage with non-price rationing and black markets','higher producer revenue','the market to clear'],a:1,e:'Price below equilibrium means quantity demanded exceeds supply, so queues, quotas and black markets appear.'},
+{id:'m40',type:'mcq',ch:'3.2',t:'Subsidy',q:'If the government pays a subsidy per unit to producers, other things equal:',o:['supply shifts right, price falls, quantity rises and the government bears the cost','supply shifts left and price rises','demand shifts right','only producers gain'],a:0,e:'A subsidy cuts unit cost and shifts supply right; consumers gain from a lower price, while taxpayers bear the cost.'},
+{id:'m41',type:'mcq',ch:'3.3',t:'Income vs wealth',q:'Which statement about income and wealth is correct?',o:['income is a flow, wealth is a stock','income is a stock, wealth is a flow','both mean annual cash inflow','wealth means cash only'],a:0,e:'Income arrives over a period; wealth is the assets owned at a point in time.'},
+{id:'m42',type:'mcq',ch:'3.3',t:'Gini',q:'A Gini coefficient of zero means:',o:['income is perfectly equally distributed','income is perfectly unequally distributed','there is no income','everyone has negative income'],a:0,e:'Zero is perfect equality and one is perfect inequality.'},
+{id:'m43',type:'mcq',ch:'3.3',t:'Regressive tax',q:'A uniform 10 per cent indirect tax on staple foods is, for low-income households:',o:['progressive','regressive, because food takes a larger share of their income','strictly proportional, so the burden is equal','unrelated to distribution'],a:1,e:'A flat rate on a necessity takes a larger share of low incomes, so the effective burden is regressive.'},
+{id:'m44',type:'mcq',ch:'4.1',t:'GDP vs GNI',q:'The difference between GDP and GNI is that:',o:['GDP uses current prices and GNI constant prices','GNI adds net factor income from abroad to GDP','GDP covers manufacturing only','they are identical'],a:1,e:'GDP is a domestic concept; GNI adds income earned abroad by residents and subtracts income paid to foreigners.'},
+{id:'m45',type:'mcq',ch:'4.1',t:'Real GDP',q:'Nominal GDP rises by 6 per cent while the GDP deflator rises by 5 per cent. Real GDP rises by about:',o:['11 per cent','1 per cent','minus 1 per cent','5 per cent'],a:1,e:'Real growth is roughly nominal growth minus inflation, so about 1 per cent.'},
+{id:'m46',type:'mcq',ch:'4.1',t:'GDP limits',q:'The main weakness of GDP as a measure of living standards is that:',o:['it ignores non-market output, the hidden economy and environmental damage, and says nothing about distribution','it counts agriculture only','it excludes services','it is measured in foreign currency'],a:0,e:'GDP misses unpaid work and negative externalities and does not show how income is shared.'},
+{id:'m47',type:'mcq',ch:'4.2',t:'Injections',q:'Which set contains only injections?',o:['Investment, government spending and exports','Saving, taxation and imports','Consumption, investment and saving','Wages, profit and rent'],a:0,e:'Injections are I, G and X; leakages are S, T and M.'},
+{id:'m48',type:'mcq',ch:'4.2',t:'Leakages',q:'If saving, taxation and imports together exceed investment, government spending and exports, national income will:',o:['rise','fall','stay the same','rise then fall'],a:1,e:'Leakages larger than injections shrink the circular flow until the two are equal.'},
+{id:'m49',type:'mcq',ch:'4.2',t:'Transfers',q:'Unemployment benefit paid by the government is:',o:['counted in GDP as government spending','a transfer payment, so it is excluded from GDP','counted as exports','counted as investment'],a:1,e:'No output is produced when the payment is made, so it is redistribution rather than government consumption.'},
+{id:'m50',type:'mcq',ch:'4.3',t:'AD',q:'Aggregate demand is:',o:['C + I + G + (X − M)','C + I + G + T','wages + profit + rent + interest','consumption + saving'],a:0,e:'AD is planned spending at a given price level, including net exports.'},
+{id:'m51',type:'mcq',ch:'4.3',t:'SRAS',q:'Money wages rise sharply while productivity is unchanged. The likely result is:',o:['SRAS shifts left, prices rise and output falls','SRAS shifts right and prices fall','AD shifts right and output rises','LRAS shifts right immediately'],a:0,e:'Higher wage costs shift SRAS left, producing stagflation: lower output with higher prices.'},
+{id:'m52',type:'mcq',ch:'4.3',t:'LRAS',q:'In the neo-classical model the long-run aggregate supply curve is:',o:['vertical at the full-employment level of output','horizontal','upward sloping','downward sloping'],a:0,e:'With fully flexible wages and prices, output returns to full capacity whatever the price level.'},
+{id:'m53',type:'mcq',ch:'4.4',t:'Potential growth',q:'Potential economic growth is shown by:',o:['a rightward shift of LRAS','a rightward shift of AD','movements along SRAS','a rise in the CPI'],a:0,e:'Capacity grows when factors of production improve or technology advances, independently of demand.'},
+{id:'m54',type:'mcq',ch:'4.4',t:'Recession',q:'A recession is usually defined as:',o:['two consecutive quarters of negative real GDP growth','inflation above 5 per cent','unemployment above 10 per cent','a 20 per cent fall in share prices'],a:0,e:'The standard definition refers to two successive quarters of falling real output.'},
+{id:'m55',type:'mcq',ch:'4.4',t:'Sustainability',q:'Sustainable growth means growth that:',o:['is as fast as possible','does not damage the resources and environment of future generations','is driven only by exports','keeps prices constant'],a:1,e:'Sustainability refers to intergenerational fairness in resource use and environmental damage.'},
+{id:'m56',type:'mcq',ch:'4.5',t:'Structural',q:'A worker loses a job when a coal mine closes and only unrelated service jobs exist nearby. This is:',o:['frictional unemployment','structural unemployment','cyclical unemployment','seasonal unemployment'],a:1,e:'A mismatch of skills or location caused by structural change is structural unemployment.'},
+{id:'m57',type:'mcq',ch:'4.5',t:'Full employment',q:'Full employment means:',o:['zero unemployment','only frictional and seasonal unemployment remain','everyone does the same job','only structural unemployment remains'],a:1,e:'Some unemployment always exists, so full employment means the natural rate remains.'},
+{id:'m58',type:'mcq',ch:'4.5',t:'Policy fit',q:'Expansionary demand policy applied to structural unemployment will usually:',o:['eliminate it quickly','have limited effect and may raise inflation','necessarily reduce inflation','automatically improve matching'],a:1,e:'Extra demand does not give workers new skills, so it mainly raises prices.'},
+{id:'m59',type:'mcq',ch:'4.6',t:'CPI',q:'The consumer prices index is:',o:['a weighted index of a basket of consumer prices compared with a base year','a simple average of all prices','the GDP deflator','the growth rate of wages'],a:0,e:'The CPI weights a representative basket by household spending patterns and compares it with a base period.'},
+{id:'m60',type:'mcq',ch:'4.6',t:'Cost-push',q:'Inflation caused by sharp rises in energy and raw material prices is:',o:['demand-pull','cost-push','monetary','structural deflation'],a:1,e:'Higher input costs shift SRAS left, so prices rise while output falls.'},
+{id:'m61',type:'mcq',ch:'4.6',t:'Redistribution',q:'A borrower with a fixed-rate loan during rising inflation usually:',o:['gains, because the real value of repayments falls','loses, because repayments rise','is unaffected','immediately demands higher rates'],a:0,e:'Inflation erodes the real value of fixed nominal debt, so debtors gain and creditors lose.'},
+{id:'m62',type:'mcq',ch:'5.1',t:'Objectives',q:'Which is not a macroeconomic objective?',o:['Economic growth','Full employment','Price stability','Maximising the profit of a single firm'],a:3,e:'Macro objectives are growth, employment, price stability, a balanced external position and improved distribution.'},
+{id:'m63',type:'mcq',ch:'5.1',t:'Conflicts',q:'Rapid economic growth is most likely to conflict with:',o:['price stability','a balanced current account','full employment','none of these ever conflict'],a:1,e:'Faster growth raises incomes and imports, tending to widen the current account deficit; it can also feed inflation.'},
+{id:'m64',type:'mcq',ch:'5.2',t:'Stabilisers',q:'Which is an automatic stabiliser?',o:['Progressive income tax and unemployment benefit','Building a new high-speed railway','A cut in interest rates','A change in tariffs'],a:0,e:'Tax revenue rises in a boom and benefit spending rises in a slump without any new decision.'},
+{id:'m65',type:'mcq',ch:'5.2',t:'Crowding out',q:'Crowding out occurs when:',o:['government borrowing raises interest rates and reduces private investment','government spending replaces private consumption','tax cuts reduce consumption','exports replace imports'],a:0,e:'Financing a deficit can push up rates and squeeze private capital spending.'},
+{id:'m66',type:'mcq',ch:'5.3',t:'Transmission',q:'When the central bank raises interest rates, the first effect is:',o:['commercial lending rates rise, so consumption and investment fall','government tax revenue rises automatically','the exchange rate is fixed immediately','exports rise immediately'],a:0,e:'Higher rates raise borrowing costs, reducing spending and therefore aggregate demand.'},
+{id:'m67',type:'mcq',ch:'5.3',t:'QE',q:'The main aim of quantitative easing is to:',o:['buy assets to lower long-term interest rates and increase liquidity','raise tax rates','increase government spending directly','restrict bank lending'],a:0,e:'When policy rates are near zero, asset purchases inject money and push down longer-term yields.'},
+{id:'m68',type:'mcq',ch:'5.4',t:'Market-based',q:'Which is a market-based supply-side policy?',o:['Deregulation, tax cuts and privatisation','Building more state schools','Raising the minimum wage','Increasing unemployment benefit'],a:0,e:'Market-based measures sharpen competition and incentives; interventionist ones involve direct government provision.'},
+{id:'m69',type:'mcq',ch:'5.4',t:'Limits',q:'The main limitation of supply-side policy is that:',o:['its effects take a long time to appear and it may widen inequality','it always causes inflation','only central banks can use it','it has no effect on output'],a:0,e:'Education and infrastructure take years to pay off, and tax cuts may benefit the rich most.'},
+{id:'m70',type:'mcq',ch:'6.1',t:'Comparative advantage',q:'A country has a comparative advantage in a good when:',o:['its opportunity cost of producing the good is lower than its partner','it uses fewer resources to produce the good','its output is the largest','its price is the lowest'],a:0,e:'Comparative advantage compares opportunity costs, not absolute efficiency.'},
+{id:'m71',type:'mcq',ch:'6.1',t:'Absolute advantage',q:'Absolute advantage means:',o:['producing the same output with fewer resources than a partner','having a lower opportunity cost','having larger total exports','having lower tariffs'],a:0,e:'Absolute advantage is about resource input per unit; comparative advantage is about what must be given up.'},
+{id:'m72',type:'mcq',ch:'6.2',t:'Quota vs tariff',q:'Compared with an equivalent tariff, an import quota:',o:['gives no tariff revenue to the government, and the scarcity rent goes to licence holders','does not raise domestic prices','necessarily increases imports','needs no licence'],a:0,e:'Both restrict imports and raise domestic prices; a quota transfers the rent to licence holders and invites rent-seeking.'},
+{id:'m73',type:'mcq',ch:'6.2',t:'Protection',q:'A tariff on imports has which direct effect on domestic consumers?',o:['Less choice and higher prices','Lower prices','More choice','No effect'],a:0,e:'Tariffs raise the domestic price of imports and reduce the quantity imported.'},
+{id:'m74',type:'mcq',ch:'6.3',t:'Current account',q:'The current account records:',o:['trade in goods and services, primary income and current transfers','goods only','direct investment only','all financial asset transactions'],a:0,e:'Financial flows belong to the financial account, not the current account.'},
+{id:'m75',type:'mcq',ch:'6.3',t:'Deficit',q:'Whether a current account deficit is sustainable depends mainly on:',o:['whether the deficit finances productive investment and whether financing can continue','the absolute size of the deficit','whether exports are the largest in the world','whether the exchange rate is fixed'],a:0,e:'A deficit that funds capital imports and is financed by stable long-term inflows can be sustained.'},
+{id:'m76',type:'mcq',ch:'6.4',t:'Depreciation',q:'Other things equal, a depreciation of the currency means:',o:['export prices in foreign currency fall and import prices in domestic currency rise','both export and import prices fall','imports become cheaper','exports rise immediately'],a:0,e:'Domestic goods become cheaper abroad and foreign goods dearer at home, which should stimulate exports and dampen imports.'},
+{id:'m77',type:'mcq',ch:'6.4',t:'Exchange rate',q:'If a central bank raises interest rates while partners do not, the currency usually:',o:['appreciates, as capital inflows increase','depreciates, as capital flows out','stays unchanged','depreciates then appreciates'],a:0,e:'Higher returns attract capital, raising demand for the currency.'},
+{id:'m78',type:'mcq',ch:'6.5',t:'Expenditure switching',q:'Expenditure-switching policies:',o:['switch domestic spending towards home-produced goods through devaluation or tariffs','cut government spending and consumption','raise taxes','raise interest rates'],a:0,e:'Switching changes the composition of spending; expenditure-reducing policies change its level.'},
+{id:'m79',type:'mcq',ch:'6.5',t:'J-curve',q:'The J-curve effect shows that, after a depreciation, the trade balance:',o:['usually worsens before it improves','improves immediately','is unaffected','improves permanently at once'],a:0,e:'Contracts are fixed in the short run, so import prices rise before volumes adjust.'},
+{id:'m80',type:'mcq',ch:'T',t:'8-mark marking',q:'In an 8-mark question, the usual caps are:',o:['AO1 3, AO2 3, AO3 2','AO1 4, AO2 4','AO1 2, AO2 4, AO3 2','there are no caps'],a:0,e:'Eight marks split into knowledge, application and evaluation; a list of definitions cannot reach the top.'},
+{id:'m81',type:'mcq',ch:'T',t:'12-mark band',q:'To reach the top band in the 8-mark part of a 12-mark essay you need:',o:['accurate concepts, both sides developed and clear causal chains','as many examples as possible','definitions only','complex sentences'],a:0,e:'Examples support analysis but cannot replace it; balance and mechanism earn the marks.'},
+{id:'m82',type:'mcq',ch:'T',t:'Evaluation',q:'The most effective way to end an 8-mark answer with evaluation is:',o:['“This depends on …” followed by a condition','“In conclusion, it is very important”','repeating the question','listing every point'],a:0,e:'A conditional judgement using a variable from the question earns AO3; vague summaries do not.'},
+{id:'m83',type:'mcq',ch:'T',t:'Conclusion',q:'The safest conclusion for a 12-mark essay is:',o:['a conditional judgement, depending on elasticity, time or scale, with a clear direction','saying that both sides have advantages','repeating the body','writing one definition'],a:0,e:'The conclusion must answer the question under stated conditions and commit to a direction.'}
+];
+
+/* ===== Built-in bank · flashcards (English) ===== */
+const BUILTIN_CARD = [
+{id:'c01',type:'card',ch:'1.1',t:'Definition',front:'Scarcity',back:'The situation in which wants are unlimited but the resources available to satisfy them are limited, so choices must be made.',note:'Relative concept; not the same as a temporary shortage.'},
+{id:'c02',type:'card',ch:'1.1',t:'Definition',front:'Opportunity cost',back:'The value of the next best alternative forgone when a choice is made.',note:'Only the next best alternative; sunk costs are excluded.'},
+{id:'c03',type:'card',ch:'1.1',t:'Definition',front:'Sunk cost',back:'A cost already incurred that cannot be recovered and therefore should not affect current decisions.',note:'Use it to explain why tuition fees are excluded.'},
+{id:'c04',type:'card',ch:'1.2',t:'Definition',front:'Ceteris paribus',back:'A modelling assumption that all other variables are held constant so that the effect of one variable can be isolated.',note:'Limits the scope of a model conclusion.'},
+{id:'c05',type:'card',ch:'1.2',t:'Definition',front:'Normative statement',back:'A statement containing a value judgement about what ought to be, which cannot be tested with data.',note:'Signals: should, ought, fair, better.'},
+{id:'c06',type:'card',ch:'1.2',t:'Definition',front:'Positive statement',back:'A statement about what is, which can be tested against evidence.',note:'Can be confirmed or refuted by data.'},
+{id:'c07',type:'card',ch:'1.3',t:'Definition',front:'Factors of production',back:'Land, labour, capital and enterprise, the inputs used to produce goods and services.',note:'Rewards: rent, wages, interest, profit.'},
+{id:'c08',type:'card',ch:'1.3',t:'Definition',front:'Human capital',back:'The skills, knowledge and health of workers that raise their productivity, created mainly by education and training.',note:'A quality of labour.'},
+{id:'c09',type:'card',ch:'1.3',t:'Definition',front:'Division of labour',back:'Breaking production into specialised tasks carried out by different workers in order to raise output per worker.',note:'Raises efficiency but increases dependence and monotony.'},
+{id:'c10',type:'card',ch:'1.4',t:'Definition',front:'Price mechanism',back:'The system by which prices signal scarcity, ration scarce goods and provide incentives to producers and consumers.',note:'Three functions: signalling, rationing, incentive.'},
+{id:'c11',type:'card',ch:'1.4',t:'Definition',front:'Mixed economy',back:'An economy in which resources are allocated partly by the market and partly by government.',note:'Most real economies are mixed.'},
+{id:'c12',type:'card',ch:'1.5',t:'Definition',front:'Production possibility curve',back:'A curve showing the maximum combinations of two goods an economy can produce when all resources are fully and efficiently employed.',note:'Inside the curve means unused resources; outside is currently impossible.'},
+{id:'c13',type:'card',ch:'1.5',t:'Definition',front:'Opportunity cost on a PPC',back:'The amount of one good that must be given up to produce one more unit of the other good, shown by the slope of the curve.',note:'A concave shape means increasing opportunity cost.'},
+{id:'c14',type:'card',ch:'1.6',t:'Definition',front:'Public good',back:'A good that is non-rival and non-excludable, so the free market under-provides it.',note:'Examples: defence, street lighting, flood control.'},
+{id:'c15',type:'card',ch:'1.6',t:'Definition',front:'Merit good',back:'A good whose benefits consumers underestimate or which creates positive externalities, so it is under-consumed in a free market.',note:'Examples: education, vaccines; corrected by subsidy or compulsion.'},
+{id:'c16',type:'card',ch:'1.6',t:'Definition',front:'Demerit good',back:'A good whose costs consumers underestimate or which creates negative externalities, so it is over-consumed in a free market.',note:'Examples: tobacco, sugary drinks; corrected by tax or regulation.'},
+{id:'c17',type:'card',ch:'1.6',t:'Definition',front:'Free rider',back:'A person who consumes a good without paying for it because the good is non-excludable.',note:'The direct cause of under-provision of public goods.'},
+{id:'c18',type:'card',ch:'2.1',t:'Definition',front:'Effective demand',back:'The willingness and ability to buy a given quantity at a given price at a given time.',note:'Willingness alone is not demand.'},
+{id:'c19',type:'card',ch:'2.1',t:'Definition',front:'Joint supply',back:'A situation in which the production of one good automatically produces another good as a by-product.',note:'Beef and leather.'},
+{id:'c20',type:'card',ch:'2.2',t:'Definition',front:'PED',back:'The percentage change in quantity demanded divided by the percentage change in price; usually negative.',note:'|PED| above 1 is elastic; 0 is perfectly inelastic.'},
+{id:'c21',type:'card',ch:'2.2',t:'Definition',front:'YED',back:'The percentage change in quantity demanded divided by the percentage change in income.',note:'Positive normal (above 1 luxury); negative inferior.'},
+{id:'c22',type:'card',ch:'2.2',t:'Definition',front:'XED',back:'The percentage change in quantity demanded of good A divided by the percentage change in the price of good B.',note:'Positive substitutes; negative complements.'},
+{id:'c23',type:'card',ch:'2.3',t:'Definition',front:'PES',back:'The percentage change in quantity supplied divided by the percentage change in price.',note:'Time is the key determinant.'},
+{id:'c24',type:'card',ch:'2.4',t:'Definition',front:'Equilibrium price',back:'The price at which quantity demanded equals quantity supplied, so there is no tendency for price to change.',note:'A shortage pushes price up; a surplus pushes it down.'},
+{id:'c25',type:'card',ch:'2.5',t:'Definition',front:'Consumer surplus',back:'The difference between the total amount consumers are willing to pay and the amount they actually pay.',note:'Area below demand and above price.'},
+{id:'c26',type:'card',ch:'2.5',t:'Definition',front:'Producer surplus',back:'The difference between the price producers receive and the minimum price they would accept.',note:'Area above supply and below price.'},
+{id:'c27',type:'card',ch:'3.1',t:'Definition',front:'Market failure',back:'A situation in which the free market allocates resources inefficiently, so social welfare is not maximised.',note:'Externalities, public goods, information failure, monopoly, inequality.'},
+{id:'c28',type:'card',ch:'3.1',t:'Definition',front:'Government failure',back:'A situation in which government intervention worsens resource allocation and reduces welfare.',note:'Poor information, distorted incentives, rent-seeking, enforcement costs.'},
+{id:'c29',type:'card',ch:'3.2',t:'Definition',front:'Specific tax',back:'A fixed amount of tax charged per unit sold, which shifts the supply curve upwards by that amount.',note:'The tax per unit is constant.'},
+{id:'c30',type:'card',ch:'3.2',t:'Definition',front:'Ad valorem tax',back:'A tax charged as a percentage of the price, so the tax paid rises as price rises.',note:'The supply curve pivots rather than shifts.'},
+{id:'c31',type:'card',ch:'3.2',t:'Definition',front:'Tax incidence',back:'The division of the burden of a tax between consumers and producers, determined by the relative elasticities of demand and supply.',note:'The less elastic side bears more; at the limit one side bears all.'},
+{id:'c32',type:'card',ch:'3.2',t:'Definition',front:'Maximum price',back:'A legal ceiling on price set below equilibrium, which creates a shortage and requires non-price rationing.',note:'Black markets, queues, quality cuts.'},
+{id:'c33',type:'card',ch:'3.2',t:'Definition',front:'Minimum price',back:'A legal floor on price set above equilibrium, which creates a surplus that may need government purchase or storage.',note:'Example: guaranteed prices for farmers.'},
+{id:'c34',type:'card',ch:'3.3',t:'Definition',front:'Income',back:'A flow of money received over a period of time from wages, rent, interest, profit or transfers.',note:'A flow concept.'},
+{id:'c35',type:'card',ch:'3.3',t:'Definition',front:'Wealth',back:'A stock of accumulated assets owned at a particular point in time.',note:'A stock, including property and financial assets.'},
+{id:'c36',type:'card',ch:'3.3',t:'Definition',front:'Gini coefficient',back:'A measure of income inequality ranging from 0 (perfect equality) to 1 (perfect inequality), derived from the Lorenz curve.',note:'A higher value means more inequality.'},
+{id:'c37',type:'card',ch:'4.1',t:'Definition',front:'GDP',back:'The total market value of final goods and services produced within a country in a given period.',note:'Domestic principle; excludes intermediate goods and transfers.'},
+{id:'c38',type:'card',ch:'4.1',t:'Definition',front:'GNI',back:'GDP plus net factor income from abroad.',note:'Residence principle.'},
+{id:'c39',type:'card',ch:'4.1',t:'Definition',front:'Real GDP',back:'GDP measured at constant prices, having removed the effect of inflation.',note:'Nominal GDP uses current prices.'},
+{id:'c40',type:'card',ch:'4.1',t:'Definition',front:'GDP deflator',back:'A price index covering all domestically produced output, used to convert nominal GDP into real GDP.',note:'Broader coverage than the CPI.'},
+{id:'c41',type:'card',ch:'4.2',t:'Definition',front:'Injections',back:'Spending that enters the circular flow from outside households: investment, government expenditure and exports.',note:'I + G + X.'},
+{id:'c42',type:'card',ch:'4.2',t:'Definition',front:'Leakages',back:'Income that leaves the circular flow before it is spent on domestic output: saving, taxation and imports.',note:'S + T + M.'},
+{id:'c43',type:'card',ch:'4.2',t:'Definition',front:'Multiplier',back:'The number of times an initial change in spending is amplified into a larger change in national income.',note:'1/(1−MPC), or 1/(MPS+MPT+MPM).'},
+{id:'c44',type:'card',ch:'4.3',t:'Definition',front:'Aggregate demand',back:'Total planned spending on goods and services at a given price level: C + I + G + (X − M).',note:'A fall in the price level moves along the AD curve.'},
+{id:'c45',type:'card',ch:'4.3',t:'Definition',front:'SRAS',back:'The relationship between output and the price level when at least one factor cost, usually wages, is fixed.',note:'Rising costs shift it left, giving stagflation.'},
+{id:'c46',type:'card',ch:'4.3',t:'Definition',front:'LRAS',back:'The maximum output an economy can produce when all factors of production are fully employed; vertical in the neo-classical model.',note:'A rightward shift is potential growth.'},
+{id:'c47',type:'card',ch:'4.4',t:'Definition',front:'Output gap',back:'The difference between actual output and potential output, expressed as a percentage of potential output.',note:'Negative gap is spare capacity; positive gap is overheating.'},
+{id:'c48',type:'card',ch:'4.4',t:'Definition',front:'Economic growth',back:'An increase in real GDP over time; short-run growth uses spare capacity while long-run growth requires LRAS to shift right.',note:'Growth is not the same as development.'},
+{id:'c49',type:'card',ch:'4.5',t:'Definition',front:'Structural unemployment',back:'Unemployment caused by a mismatch between the skills or location of workers and the requirements of available jobs.',note:'Caused by structural change in industry or technology.'},
+{id:'c50',type:'card',ch:'4.5',t:'Definition',front:'Full employment',back:'The level of employment at which only frictional and seasonal unemployment remain.',note:'Not zero unemployment.'},
+{id:'c51',type:'card',ch:'4.6',t:'Definition',front:'Inflation',back:'A sustained rise in the general price level which reduces the purchasing power of money.',note:'Distinguish from a one-off price rise.'},
+{id:'c52',type:'card',ch:'4.6',t:'Definition',front:'CPI',back:'A weighted index of the prices of a representative basket of consumer goods, compared with a base year.',note:'Weights need updating; substitution bias.'},
+{id:'c53',type:'card',ch:'4.6',t:'Definition',front:'Demand-pull inflation',back:'Inflation caused by aggregate demand growing faster than the capacity of the economy to produce.',note:'AD shifts right; output and prices rise together.'},
+{id:'c54',type:'card',ch:'4.6',t:'Definition',front:'Cost-push inflation',back:'Inflation caused by rising costs of production, which shifts SRAS to the left.',note:'Output falls while prices rise: stagflation.'},
+{id:'c55',type:'card',ch:'5.2',t:'Definition',front:'Fiscal policy',back:'The use of government spending and taxation to influence aggregate demand and the level of economic activity.',note:'Expansionary: spend more, tax less. Contractionary: the reverse.'},
+{id:'c56',type:'card',ch:'5.2',t:'Definition',front:'Automatic stabiliser',back:'A feature such as progressive taxation or unemployment benefit that dampens fluctuations without any new policy decision.',note:'Taxes rise automatically in a boom; benefits rise in a slump.'},
+{id:'c57',type:'card',ch:'5.2',t:'Definition',front:'Crowding out',back:'A situation where government borrowing raises interest rates and so reduces private sector investment.',note:'Weakens the effect of expansionary fiscal policy.'},
+{id:'c58',type:'card',ch:'5.3',t:'Definition',front:'Monetary policy',back:'The use of interest rates, the money supply and exchange rate tools by the central bank to influence inflation and demand.',note:'Transmission: interest rate → borrowing → spending → AD.'},
+{id:'c59',type:'card',ch:'5.3',t:'Definition',front:'Quantitative easing',back:'Central bank purchases of financial assets to inject money into the economy and lower long-term interest rates.',note:'Used when interest rates are near zero.'},
+{id:'c60',type:'card',ch:'5.4',t:'Definition',front:'Supply-side policy',back:'Policies that increase the productive capacity of the economy, such as education, infrastructure, deregulation and tax reform.',note:'Market-based versus interventionist.'},
+{id:'c61',type:'card',ch:'6.1',t:'Definition',front:'Comparative advantage',back:'A country has a comparative advantage in a good when it can produce it at a lower opportunity cost than a trading partner.',note:'Drives specialisation, not absolute efficiency.'},
+{id:'c62',type:'card',ch:'6.1',t:'Definition',front:'Absolute advantage',back:'The ability to produce more output with the same resources, or the same output with fewer resources, than a trading partner.',note:'Absolute advantage alone does not explain the gains from trade.'},
+{id:'c63',type:'card',ch:'6.2',t:'Definition',front:'Tariff',back:'A tax on imported goods which raises their domestic price and protects domestic producers.',note:'Raises revenue; consumers lose.'},
+{id:'c64',type:'card',ch:'6.2',t:'Definition',front:'Quota',back:'A physical limit on the quantity of a good that may be imported in a period.',note:'Rent goes to licence holders and invites rent-seeking.'},
+{id:'c65',type:'card',ch:'6.3',t:'Definition',front:'Current account',back:'The record of trade in goods and services, primary income and current transfers between residents and the rest of the world.',note:'Excludes financial account flows.'},
+{id:'c66',type:'card',ch:'6.4',t:'Definition',front:'Depreciation',back:'A fall in the value of a currency in a floating exchange rate system caused by market forces.',note:'Distinguish from devaluation under a fixed rate.'},
+{id:'c67',type:'card',ch:'6.5',t:'Definition',front:'Expenditure-switching policy',back:'Policies such as devaluation or tariffs that switch domestic spending from imports towards home-produced goods.',note:'Contrast with expenditure-reducing policies.'}
+];
+
+/* ===== Built-in bank · short answers (English) ===== */
+const BUILTIN_SHORT = [
+{id:'s01',type:'short',ch:'1.1',t:'8 marks',q:'Explain why scarcity requires choices and what is meant by opportunity cost. (8)',pts:[{t:'Accurate definition of scarcity: unlimited wants, limited resources',s:2},{t:'Explains that choosing is therefore unavoidable and resources must be allocated',s:2},{t:'Definition of opportunity cost: value of the next best alternative forgone',s:2},{t:'A concrete example, personal or government, showing the trade-off',s:2}],model:'Scarcity means wants are unlimited while the resources available to satisfy them are limited. Because resources cannot satisfy every want, individuals, firms and governments must choose how to allocate them. Every choice therefore carries an opportunity cost, the value of the next best alternative forgone. For example, if a government spends a fixed budget on a new hospital, the opportunity cost is the school or road that could have been built instead. This depends on which alternative is genuinely the next best one, not on the money actually paid.'},
+{id:'s02',type:'short',ch:'1.5',t:'8 marks',q:'Using a PPC, explain how an economy that devotes more resources to capital goods may change its production possibilities over time. (8)',pts:[{t:'Describes the PPC: maximum combinations with full and efficient employment',s:2},{t:'Movement along the curve means fewer consumer goods now, with increasing opportunity cost',s:2},{t:'Capital goods raise future capacity, shifting the whole curve outwards',s:3},{t:'One sentence weighing the short run against the long run',s:1}],model:'A PPC shows the maximum combinations of consumer and capital goods an economy can produce with all resources fully employed. Moving along the curve towards capital goods means fewer consumer goods now, and the concave shape shows increasing opportunity cost as resources less suited to capital production are used. Capital goods, however, add to the capital stock, so in later periods the curve shifts outwards and more of both goods can be produced. The size of the gain depends on whether the capital is used productively and on how long the investment takes to come on stream.'},
+{id:'s03',type:'short',ch:'2.2',t:'8 marks',q:'Explain two determinants of price elasticity of demand and how elasticity affects a firm total revenue. (8)',pts:[{t:'First determinant: number and closeness of substitutes, with the mechanism',s:2},{t:'Second determinant: necessity, share of income or time horizon',s:2},{t:'With |PED| above 1, cutting price raises revenue and raising price reduces it',s:2},{t:'With |PED| below 1, raising price raises revenue',s:2}],model:'PED measures the responsiveness of quantity demanded to a price change. It is high when close substitutes exist, because consumers can switch easily, and low for necessities or when the good takes a small share of income. If demand is elastic, a price rise lowers total revenue because the fall in quantity outweighs the higher price, and a price cut raises revenue. If demand is inelastic, raising price increases revenue. This depends on the actual elasticity at the current price, which the firm has to estimate before changing price.'},
+{id:'s04',type:'short',ch:'2.4',t:'8 marks',q:'Explain how the price mechanism removes a shortage in a free market. (8)',pts:[{t:'Defines a shortage: price below equilibrium, quantity demanded exceeds supply',s:2},{t:'Rising price rations demand as consumers move up the demand curve',s:2},{t:'Rising price gives an incentive for supply to increase along the supply curve',s:2},{t:'Explains the return to equilibrium, or notes that a binding maximum price blocks it',s:2}],model:'A shortage exists when price is below equilibrium, so quantity demanded exceeds quantity supplied. Unsatisfied buyers bid the price up. As price rises, the rationing function means some consumers reduce or postpone purchases, while the incentive function means higher price and profit encourage producers to supply more. Price continues to rise until quantity demanded equals quantity supplied, so the shortage disappears. This only works if the market is free to adjust, so a binding maximum price would keep the shortage in place.'},
+{id:'s05',type:'short',ch:'3.2',t:'12 marks',q:'Discuss whether a maximum price is an effective way to help low-income consumers. (12)',pts:[{t:'Mechanism: a ceiling below equilibrium creates a shortage',s:2},{t:'Benefit: lower prices cut essential spending for low-income households',s:2},{t:'Drawbacks: shortage, queues, black markets, quality cuts and falling supply',s:3},{t:'Alternatives: subsidy, targeted transfers, expanding supply',s:3},{t:'Conditional judgement: depends on the size of the gap and enforcement',s:2}],model:'A maximum price set below equilibrium lowers the price of a necessity such as rent or food, which directly reduces spending by low-income households. However, at that price quantity demanded exceeds quantity supplied, so a shortage appears and allocation occurs through queues, rationing or black markets; producers may cut quality or exit, and supply shrinks over time. Poor households may therefore face less supply rather than lower prices, and those without time or contacts lose out. Subsidies or targeted cash transfers preserve the price signal while helping the poor, and raising supply is more durable. Whether the ceiling works depends on how far it is set below equilibrium and on how effectively non-price rationing is enforced.'},
+{id:'s06',type:'short',ch:'3.2',t:'12 marks',q:'Discuss who bears the burden of an indirect tax on a good. (12)',pts:[{t:'The tax shifts supply up, so price rises and quantity falls',s:2},{t:'Incidence depends on the relative elasticities of demand and supply',s:3},{t:'Inelastic demand with elastic supply: consumers bear most, as with necessities',s:3},{t:'Elastic demand with inelastic supply: producers absorb most',s:2},{t:'Also depends on market power, substitutes and the time period',s:2}],model:'An indirect tax raises the cost of supply, shifting the supply curve up, so the new equilibrium has a higher price and a smaller quantity. The burden falls mainly on the side of the market that is less elastic, because that side cannot easily escape the tax. If demand is inelastic, as for cigarettes or basic food, consumers pay most of the tax and quantity falls only slightly, which is why governments tax demerit goods. If demand is elastic and supply inelastic, producers absorb most of the tax through lower net revenue. The outcome also depends on market power and on the time period, since elasticities rise as consumers find substitutes.'},
+{id:'s07',type:'short',ch:'3.3',t:'8 marks',q:'Explain two causes of income inequality within a country. (8)',pts:[{t:'Cause one: differences in education, skills and experience, and the wage mechanism',s:3},{t:'Cause two: unequal ownership of wealth and its returns, or precarious employment',s:3},{t:'Explains what amplifies inequality, such as a regressive tax system or unequal access',s:2}],model:'One cause is differences in education, skills and experience, which change worker productivity and therefore wages; as demand grows for skilled labour, the wage gap widens. Another is the distribution of wealth and its returns: owners of property and shares receive rent, interest and dividends that can be passed on, so wealth accumulates and generates further income. Employment structure matters too, since temporary or informal work brings low and unstable pay. The final degree of inequality depends on how progressive the tax and benefit system is and on equality of access to education.'},
+{id:'s08',type:'short',ch:'4.2',t:'8 marks',q:'Explain how injections and leakages affect the level of national income. (8)',pts:[{t:'Defines injections I + G + X and leakages S + T + M',s:2},{t:'Injections raise spending, and income expands through the multiplier',s:2},{t:'Leakages reduce spending, so income contracts',s:2},{t:'Equilibrium where injections equal leakages, with the multiplier determining the size',s:2}],model:'In the circular flow, income earned by households is either spent on domestic output or leaks out as saving, taxation and imports, while spending enters from outside as investment, government expenditure and exports. If injections exceed leakages, total spending rises and firms expand output and employment, so national income increases by more than the initial injection through the multiplier. If leakages exceed injections, spending falls and income contracts. Equilibrium is reached where injections equal leakages. How large the change is depends on the size of the multiplier, which is smaller when the marginal propensity to save, tax and import is high.'},
+{id:'s09',type:'short',ch:'4.3',t:'12 marks',q:'Discuss whether an increase in aggregate demand always raises output. (12)',pts:[{t:'Mechanism: AD shifts right along SRAS, raising output and prices',s:2},{t:'With spare capacity the output response is large and inflation pressure small',s:3},{t:'Near or beyond full capacity the SRAS steepens and extra spending mostly raises prices',s:3},{t:'Supply constraints: skilled labour, capital, imported inputs, composition of demand',s:2},{t:'Conditional judgement',s:2}],model:'A rise in aggregate demand shifts AD to the right; along an upward-sloping SRAS, firms produce more at higher prices, so output and the price level both rise. When spare capacity and unemployment exist, the output response is large and inflation pressure is modest. As the economy approaches full capacity, SRAS becomes steeper and extra spending mostly raises prices rather than output. Supply-side limits also matter: shortages of skilled labour, capital or imported inputs determine how much can actually be supplied. Whether output rises therefore depends on the size of the output gap and on whether supply can expand; in a fully employed economy, demand growth mainly produces inflation.'},
+{id:'s10',type:'short',ch:'4.4',t:'12 marks',q:'Discuss the extent to which economic growth improves living standards. (12)',pts:[{t:'Benefits: higher incomes, more employment, more tax revenue for public services',s:2},{t:'Quality of growth: resource depletion and pollution reduce welfare',s:3},{t:'Distribution: gains may accrue to a few, so average income overstates improvement',s:3},{t:'Limits of GDP: unpaid work, leisure, health, externalities',s:2},{t:'Conditional judgement',s:2}],model:'Growth raises real GDP per head, which normally means higher incomes, more employment and more tax revenue for public services, so material living standards usually improve. However, growth that relies on resource depletion or heavy pollution can reduce welfare, because these costs are not deducted from GDP. The distribution of the gains also matters: if growth accrues to a small group, average income rises while many households see little change. GDP also omits unpaid work, leisure, health and safety. Whether growth improves living standards therefore depends on its composition, its sustainability and how the gains are shared.'},
+{id:'s11',type:'short',ch:'4.5',t:'12 marks',q:'Discuss the policies a government could use to reduce structural unemployment. (12)',pts:[{t:'Defines structural unemployment as a skills or location mismatch',s:2},{t:'Education, vocational training and apprenticeships',s:3},{t:'Relocation grants, affordable housing and transport to improve mobility',s:3},{t:'Regional and industrial policy, infrastructure investment',s:2},{t:'Limits: slow, costly, may mismatch future demand; demand stimulus does not help',s:2}],model:'Structural unemployment arises when the skills or location of workers no longer match available jobs, often after deindustrialisation or rapid technical change. Education, vocational training and apprenticeships can equip workers with the skills employers now demand, while relocation grants, affordable housing and better transport reduce the geographical mismatch. Regional policy and infrastructure investment can create jobs in depressed areas. These measures are costly and slow, training may not match future demand, and retraining does not help those unable or unwilling to move. By contrast, general demand stimulus does little for structural unemployment and risks inflation. Success therefore depends on accurate information about skill shortages and on sustained funding.'},
+{id:'s12',type:'short',ch:'4.6',t:'12 marks',q:'Discuss the costs of inflation to an economy. (12)',pts:[{t:'Loss of purchasing power for fixed-income households and creditors',s:2},{t:'Uncertainty reduces investment; menu and search costs rise',s:2},{t:'Falling international competitiveness if inflation exceeds partners, unless the currency depreciates',s:3},{t:'Redistribution between debtors and savers',s:3},{t:'Judgement: depends on the rate, predictability and indexation',s:2}],model:'Inflation reduces the purchasing power of money, so households on fixed incomes and creditors receiving fixed nominal payments lose out, while borrowers gain as the real value of debt falls. Uncertainty about future prices discourages investment and long-term contracts and raises menu and search costs, which lowers efficiency. If domestic inflation exceeds that of trading partners, exports become less competitive unless the exchange rate depreciates. How damaging this is depends on the rate and predictability of inflation: moderate, stable and indexed inflation causes far less harm than high or volatile inflation.'},
+{id:'s13',type:'short',ch:'5.2',t:'12 marks',q:'Discuss whether fiscal policy is the best way to end a recession. (12)',pts:[{t:'Mechanism: higher spending or lower taxes raises AD, output and employment',s:2},{t:'Advantages: directly raises demand, can be targeted, works at the zero bound',s:3},{t:'Limits: implementation lags, crowding out, debt and interest costs',s:3},{t:'Comparison with monetary policy: faster but possibly ineffective',s:2},{t:'Conditional judgement',s:2}],model:'In a recession caused by weak aggregate demand, higher government spending or lower taxes raises AD, so firms sell more and hire, and the multiplier amplifies the effect. Fiscal policy can be targeted at infrastructure or at low-income households, and it still works when interest rates are near zero. However, decisions and spending take time, so stimulus may arrive after recovery; borrowing can push up interest rates and crowd out investment, and deficits add to debt and future interest costs. Monetary policy acts faster but may fail in a deep recession. Whether fiscal policy is best depends on the size of the output gap, the speed of implementation and the fiscal space available.'},
+{id:'s14',type:'short',ch:'5.3',t:'12 marks',q:'Discuss how effective monetary policy is in controlling inflation. (12)',pts:[{t:'Mechanism: higher rates raise borrowing costs, cut consumption and investment, so AD contracts',s:2},{t:'Most effective against demand-pull inflation',s:2},{t:'Against cost-push inflation, tightening cuts output as well, at high cost',s:3},{t:'Limits: lags, weak transmission, zero bound, exchange rate and capital flows',s:3},{t:'Conditional judgement',s:2}],model:'Higher interest rates raise the cost of borrowing and the return on saving, so consumption and investment fall, aggregate demand contracts and inflationary pressure eases. This works best against demand-pull inflation, where the excess is clearly in spending. When inflation is cost-push, tightening reduces demand and output without removing the cost increase, so unemployment rises while prices stay high. Policy also suffers from time lags and uncertain transmission, is weaker when rates are near zero, and can attract capital inflows that appreciate the currency and hurt exporters. Its effectiveness therefore depends on the source of inflation, the sensitivity of borrowers to rates and the credibility of the central bank.'},
+{id:'s15',type:'short',ch:'6.1',t:'8 marks',q:'Explain the difference between absolute and comparative advantage. (8)',pts:[{t:'Absolute advantage: fewer resources for the same output',s:2},{t:'Comparative advantage: lower opportunity cost',s:2},{t:'A numerical example showing the two can differ',s:2},{t:'Comparative advantage, not absolute, explains gains from trade',s:2}],model:'A country has an absolute advantage when it can produce a good using fewer resources than a trading partner, so output per worker is higher. Comparative advantage compares opportunity costs: the country that gives up less of another good to produce one unit has the comparative advantage. A country may be more efficient in both goods, yet still have a comparative advantage in only one, because its advantage is larger there. Specialising according to comparative advantage raises total output, so trade benefits both partners even if one is absolutely less efficient. This is why comparative advantage, not absolute advantage, explains the gains from trade.'},
+{id:'s16',type:'short',ch:'6.2',t:'12 marks',q:'Discuss whether a country should protect its domestic steel industry. (12)',pts:[{t:'Arguments for: employment, strategic supply, infant industry, anti-dumping',s:3},{t:'Arguments against: higher consumer and downstream costs, retaliation',s:3},{t:'Efficiency loss: resources diverted from comparative advantage',s:3},{t:'Alternatives: adjustment assistance, retraining, temporary safeguards',s:2},{t:'Conditional judgement',s:1}],model:'Protection may preserve steel jobs, secure a strategic input, and a temporary tariff can shelter an industry while it restructures or defends itself against dumping. However, tariffs raise costs for construction and manufacturing that use steel, making domestic producers less competitive, and consumers pay more; trading partners may retaliate, harming exports. Protection also delays adjustment away from an industry where the country may lack comparative advantage. Targeted adjustment assistance, retraining and temporary safeguards are usually cheaper than permanent protection. Whether protection is justified depends on whether the industry has a realistic path to competitiveness and on the risk of retaliation.'},
+{id:'s17',type:'short',ch:'6.5',t:'8 marks',q:'Explain expenditure-reducing and expenditure-switching policies used to correct a current account deficit. (8)',pts:[{t:'Expenditure-reducing: tighter fiscal or monetary policy cuts import demand',s:3},{t:'Expenditure-switching: devaluation, tariffs or export subsidies redirect spending',s:3},{t:'Side effects and the J-curve as a judgement',s:2}],model:'Expenditure-reducing policies cut total domestic spending through higher taxes, lower government spending or higher interest rates, so households and firms buy fewer imports and the deficit narrows, though growth and employment slow. Expenditure-switching policies change the composition rather than the level of spending: a depreciation makes imports dearer and exports cheaper, while tariffs or export subsidies redirect demand to domestic goods. Switching works only if consumers respond to price changes, and the J-curve means the deficit may worsen before it improves. The choice depends on whether the deficit comes from excess domestic demand or from a price competitiveness problem.'},
+{id:'s18',type:'short',ch:'T',t:'8 marks',q:'Outline the structure you would use for an 8-mark explain question, and where the marks come from. (8)',pts:[{t:'Open with a precise definition or statement of the concept (AO1)',s:2},{t:'Build a causal chain, each step linked with connectives',s:2},{t:'Apply the chain to the context given in the question (AO2)',s:2},{t:'Close with one conditional evaluative sentence (AO3)',s:2}],model:'For an 8-mark explain question, open with a precise definition, since AO1 knowledge carries about three marks. Then build a chain of reasoning rather than a list: each sentence should show how one change leads to the next, using connectives such as therefore, as a result and which means. Apply the chain to the context given in the question to earn AO2 marks. Finish with one evaluative sentence, such as this depends on the elasticity of demand or on the time allowed, which secures the AO3 marks. A common error is writing three separate definitions with no mechanism, which caps the answer at the knowledge marks.'},
+{id:'s19',type:'short',ch:'T',t:'12 marks',q:'Explain how to structure a 12-mark discuss essay to reach the top band. (12)',pts:[{t:'Introduction: define key terms and state the two sides to be examined',s:2},{t:'Two developed arguments for one side, each with mechanism and context',s:3},{t:'Two arguments for the other side, showing when the first arguments fail',s:3},{t:'Evaluation: short run versus long run, scale, elasticity, implementation',s:2},{t:'Conclusion: conditional judgement with a clear direction',s:2}],model:'A 12-mark answer is marked on knowledge, application, analysis and evaluation, so structure matters. Begin by defining the key terms and stating the two sides you will examine. In the body, give two developed arguments for one side, each with a mechanism and a link to the context, then two arguments for the other side, showing the conditions under which the first arguments fail. Evaluation should compare the strength of the arguments, distinguishing short run from long run, small from large economies, or elastic from inelastic responses. Conclude with a conditional judgement that answers the question directly, for example whether the policy works depends on the size of the output gap. Balance and a clear final judgement separate the top band from a list of points.'},
+{id:'s20',type:'short',ch:'T',t:'12 marks',q:'Explain the role of evaluation in 12-mark answers and give two templates you can reuse. (12)',pts:[{t:'Evaluation weighs arguments and states conditions, rather than summarising',s:2},{t:'Template one: short run versus long run, depending on time',s:3},{t:'Template two: group judgement, depending on the type of country, firm or household',s:3},{t:'Every evaluative sentence uses a variable from the question',s:2},{t:'The conclusion echoes the evaluation with a direction',s:2}],model:'Evaluation is not a summary of both sides; it weighs them and states the conditions under which one argument dominates, which is what AO3 rewards. One reliable template is the short-run versus long-run judgement: a policy may raise output now but only inflation later, so whether it works depends on the time horizon and on spare capacity. A second template is group-based: the effect may hold for large firms with elastic supply but not for small ones, or for countries with a floating exchange rate but not for a pegged one. Each evaluative sentence must use a variable from the question, and the conclusion should restate that condition with a clear direction.'}
+];
+
+const BUILTIN = BUILTIN_MCQ.concat(BUILTIN_CARD, BUILTIN_SHORT);
+
+/* ========== 9708 Economics · knowledge self-check (application logic) ========== */
+const CHAP_NAMES = {
+  '1.1':'Scarcity & opportunity cost','1.2':'Economic methodology','1.3':'Factors of production','1.4':'Economic systems',
+  '1.5':'Production possibility curves','1.6':'Classification of goods',
+  '2.1':'Demand & supply','2.2':'Elasticities','2.3':'Price elasticity of supply','2.4':'Equilibrium & prices','2.5':'Consumer & producer surplus',
+  '3.1':'Why governments intervene','3.2':'Intervention: methods & effects','3.3':'Income & wealth inequality',
+  '4.1':'National income statistics','4.2':'Circular flow','4.3':'Aggregate demand & supply','4.4':'Economic growth','4.5':'Unemployment','4.6':'Inflation & price stability',
+  '5.1':'Objectives & conflicts','5.2':'Fiscal policy','5.3':'Monetary policy','5.4':'Supply-side policy',
+  '6.1':'Reasons for trade','6.2':'Protectionism','6.3':'Current account','6.4':'Exchange rates','6.5':'Correcting deficits',
+  'T':'Exam technique','?':'Unclassified'
+};
+const CHAP_ORDER = Object.keys(CHAP_NAMES);
+/* keyword hints used to auto-file imported questions into a chapter (2027 syllabus order) */
+const CHAP_HINTS = {
+  '1.1': ['scarcity','opportunity cost','scarce','unlimited wants','free good','economic good','limited resources','what to produce','how to produce','for whom to produce','resource allocation'],
+  '1.2': ['ceteris paribus','positive statement','normative statement','economic model','hypothesis','methodology','correlation','causation','index number','assumption','value judgement','economic data'],
+  '1.3': ['factors of production','factor of production','entrepreneur','enterprise','factor mobility','occupational mobility','geographical mobility','division of labour','human capital','capital formation','labour force participation'],
+  '1.4': ['economic system','market economy','planned economy','mixed economy','price mechanism','command economy','public sector','private sector','state ownership','resource allocation mechanism'],
+  '1.5': ['production possibility','production possibility curve','ppc','ppf','opportunity cost curve','attainable','outward shift','inward shift','concave to the origin','points inside the curve'],
+  '1.6': ['merit good','demerit good','public good','private good','free rider','non-excludable','non rival','quasi public good','rivalrous','excludable','gift of nature','transferable'],
+  '2.1': ['demand curve','supply curve','quantity demanded','quantity supplied','movement along','shift of the demand curve','shift of the supply curve','determinants of demand','determinants of supply','joint demand','competitive demand','composite demand','derived demand','substitute good','complementary good'],
+  '2.2': ['price elasticity of demand','income elasticity of demand','cross elasticity of demand','elastic demand','inelastic demand','unit elastic','total revenue','elasticity of demand','elasticity of demand and revenue'],
+  '2.3': ['price elasticity of supply','elasticity of supply','spare capacity','time period','stock of finished goods','factor mobility in supply','supply responsiveness'],
+  '2.4': ['equilibrium price','equilibrium quantity','disequilibrium','shortage','surplus','market clearing','rationing function','signalling function','excess demand','excess supply','equilibrium market price'],
+  '2.5': ['consumer surplus','producer surplus','total welfare','allocative efficiency','deadweight loss','willingness to pay','welfare loss','net welfare','distributional effect'],
+  '3.1': ['market failure','externality','external cost','external benefit','information failure','asymmetric information','factor immobility','missing market','monopoly power','demerit good','merit good','public good','government intervention','under provision'],
+  '3.2': ['indirect tax','specific tax','ad valorem','subsidy','maximum price','minimum price','price ceiling','price floor','buffer stock','production quota','regulation','state provision','tradable permit','nationalisation','government failure','tax incidence'],
+  '3.3': ['income inequality','wealth inequality','poverty','lorenz curve','gini coefficient','progressive tax','regressive tax','proportional tax','means tested','transfer payment','relative poverty','absolute poverty','redistribution'],
+  '4.1': ['gross domestic product','national income statistics','gross national','nominal gdp','real gdp','purchasing power parity','per capita','double counting','net income from abroad','current prices','constant prices','human development index','gdp and gnp'],
+  '4.2': ['circular flow','injection','leakage','withdrawal','multiplier','multiplier effect','marginal propensity','aggregate expenditure','national income equilibrium'],
+  '4.3': ['aggregate demand','aggregate supply','ad curve','sras','lras','keynesian','classical model','deflationary gap','inflationary gap','ad shifts','as shifts','shape of the aggregate supply'],
+  '4.4': ['economic growth','growth rate','potential growth','actual growth','output gap','sustainable growth','productivity growth','gdp per capita growth','productive capacity','catch up growth'],
+  '4.5': ['unemployment','frictional','structural unemployment','cyclical unemployment','seasonal unemployment','real wage unemployment','labour force','natural rate of unemployment','claimant count','labour force survey','underemployment','unemployed'],
+  '4.6': ['inflation','deflation','disinflation','consumer price index','retail price index','demand pull','cost push','money supply','quantity theory','hyperinflation','wage price spiral','menu costs','shoe leather','inflationary pressure'],
+  '5.1': ['macroeconomic objectives','conflict between objectives','trade off','phillips curve','policy conflict','balance of payments objective','objectives of government policy','policy trade offs'],
+  '5.2': ['fiscal policy','government spending','taxation','budget deficit','budget surplus','expansionary fiscal','contractionary fiscal','automatic stabiliser','direct tax','government borrowing','public debt','fiscal stance'],
+  '5.3': ['monetary policy','interest rate','central bank','money supply','quantitative easing','bank rate','reserve requirement','open market operation','monetary policy committee','liquidity','base rate'],
+  '5.4': ['supply side policy','supply side','productivity','education and training','deregulation','privatisation','labour market flexibility','infrastructure','incentive to work','trade union','minimum wage','labour market reform'],
+  '6.1': ['international trade','absolute advantage','comparative advantage','specialisation','specialization','gains from trade','free trade','trade pattern','trade between countries','opportunity cost ratio'],
+  '6.2': ['protectionism','tariff','import quota','embargo','administrative barrier','infant industry','dumping','customs union','trade barrier','import licence','domestic producer protection'],
+  '6.3': ['current account','balance of payments','balance of trade','invisibles','visible trade','current account deficit','current account surplus','terms of trade','export revenue','import expenditure'],
+  '6.4': ['exchange rate','appreciation','depreciation','devaluation','revaluation','floating exchange rate','fixed exchange rate','managed float','j curve','marshall lerner','foreign currency','currency value'],
+  '6.5': ['correct a deficit','expenditure reducing','expenditure switching','deficit correction','balance of payments deficit','import controls','deflationary policy','exchange rate policy','supply side measures for the deficit'],
+  'T': ['explain why','evaluate whether','assess whether','discuss whether','to what extent','8 marks','12 marks','evaluation','judgement','depends on','significance of the evidence']
+};
+const TYPE_NAME = { mcq:'Multiple choice', card:'Flashcard', short:'Short answer' };
+
+const LS_BANK = 'econ9708.bank.v1';
+const LS_PROG = 'econ9708.prog.v1';
+const LS_META = 'econ9708.meta.v1';
+
+const clone = o => JSON.parse(JSON.stringify(o));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = sel => document.querySelector(sel);
+const srcLabel = s => String(s == null ? '' : s).replace(/_([A-D])$/i, '').trim();
+const uid = () => 'q' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+
+let storeOK = true;
+function load(key, fallback){
+  try { const raw = localStorage.getItem(key); if (raw) return JSON.parse(raw); } catch(e){ storeOK = false; }
+  return fallback;
+}
+function save(key, val){
+  try { localStorage.setItem(key, JSON.stringify(val)); storeOK = true; }
+  catch(e){ storeOK = false; }
+}
+
+let bank = load(LS_BANK, null);
+if (!Array.isArray(bank) || !bank.length) bank = clone(BUILTIN);
+let prog = load(LS_PROG, {}) || {};
+let meta = load(LS_META, { ts: 0, src: 'Built-in bank' }) || { ts: 0, src: 'Built-in bank' };
+
+/* ---------- accounts: Supabase auth + cloud bank & progress ---------- */
+const LS_BACKEND = 'econ9708.backend.v1';
+const SB_LIB = 'https://fastly.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js';
+let backend = load(LS_BACKEND, null) || null;
+let sb = null;
+let sess = { user: null, email: '', role: 'guest' };
+let dirtyProg = {}, progTimer = null;
+
+const signedIn = () => !!sess.user;
+
+/* local owner mode: an admin passphrase that unlocks editing on this device only */
+const LS_OWNER = 'econ9708.owner.v1';
+const OWNER_PASS = '9708admin';
+let ownerRec = load(LS_OWNER, null) || null;
+const ownerOn = () => !!(ownerRec && ownerRec.hash);
+const ownerStamp = str => {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+  return 'h' + h.toString(36) + '·' + str.length;
+};
+const isAdmin = () => sess.role === 'admin' || ownerOn();
+const roleName = () => !signedIn() ? 'Guest' : (isAdmin() ? 'Admin' : 'Student');
+const connected = () => !!(backend && backend.url && backend.key);
+
+function persistBank(src){
+  if (src) meta.src = src;
+  meta.ts = Date.now();
+  save(LS_BANK, bank); save(LS_META, meta); paintStatus();
+  if (isAdmin()) pushBank();
+}
+function persistProg(){
+  if (!signedIn()) return;              /* guest: kept in memory only */
+  save(LS_PROG, prog);
+}
+
+function fmtTime(ts){
+  if (!ts) return 'built-in version';
+  const d = new Date(ts);
+  return d.toLocaleString('en-GB', { day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
+}
+
+/* ---------- statistics ---------- */
+function pOf(id){ return prog[id] || { n:0, r:0, w:0, box:0, ts:0 }; }
+function isMastered(id){ return pOf(id).box >= 3; }
+function dueCount(){ return bank.filter(q => { const p = pOf(q.id); return p.n > 0 && p.box < 3; }).length; }
+function practisedCount(){ return bank.filter(q => pOf(q.id).n > 0).length; }
+function accuracy(){
+  let n = 0, r = 0;
+  bank.forEach(q => { const p = pOf(q.id); n += p.n; r += p.r; });
+  return n ? Math.round(r / n * 100) : 0;
+}
+function attempt(id, ok){
+  const p = pOf(id);
+  p.n += 1;
+  if (ok) { p.r += 1; p.box = Math.min(5, (p.box || 0) + 1); }
+  else { p.w += 1; p.box = 1; }
+  p.ts = Date.now();
+  prog[id] = p;
+  persistProg();
+  queueProg(id);
+}
+function attemptScore(id, ratio){
+  const p = pOf(id);
+  p.n += 1;
+  if (ratio >= 0.7) { p.r += 1; p.box = Math.min(5, (p.box || 0) + 1); }
+  else { p.w += 1; p.box = 1; }
+  p.ts = Date.now();
+  prog[id] = p;
+  persistProg();
+  queueProg(id);
+}
+
+function paintStatus(){
+  const n = bank.length, s = practisedCount();
+  const hd = $('#hd-count');
+  const tail = signedIn() ? '' : ' · not saved';
+  if (hd) hd.textContent = s + ' of ' + n + ' practised' + tail;
+  const foot = $('#railfoot');
+  if (foot) foot.innerHTML = `<b>${n} questions</b>${
+    signedIn() ? 'Progress is saved to your account and follows you to any device.' : 'Definitions, multiple choice and essay technique. As a guest your answers are kept in this tab only.'
+  }${connState()}`;
+  paintAcct();
+}
+
+function connState(){
+  if (!connected()) return '<br><span style="color:#A9762F">Backend not connected</span>';
+  if (storeOK) return '';
+  return '<br>Progress not saved';
+}
+
+/* ---------- account chip ---------- */
+function acctHtml(){
+  if (!signedIn()){
+    if (ownerOn()) return `<button class="who" id="acct-me" aria-label="Account"><span>Admin</span><span class="r">local</span></button>`;
+    return `<button id="acct-in" aria-label="Sign in"><span class="gem"></span>Sign in</button>`;
+  }
+  const who = sess.email ? sess.email.split('@')[0] : roleName();
+  return `<button class="who" id="acct-me" aria-label="Account"><span>${esc(who)}</span><span class="r">${roleName()}</span></button>`;
+}
+function paintAcct(){
+  const el = $('#acct');
+  if (el){
+    el.innerHTML = acctHtml();
+    const b = el.querySelector('#acct-in');
+    if (b) b.onclick = authDialog;
+    const m = el.querySelector('#acct-me');
+    if (m) m.onclick = accountDialog;
+  }
+  const rail = $('#railfoot');
+  if (rail){
+    const bar = document.createElement('div');
+    bar.className = 'acct';
+    bar.style.marginTop = '10px';
+    bar.innerHTML = acctHtml();
+    rail.appendChild(bar);
+    const b = bar.querySelector('#acct-in');
+    if (b) b.onclick = authDialog;
+    const m = bar.querySelector('#acct-me');
+    if (m) m.onclick = accountDialog;
+  }
+}
+
+/* ---------- cloud layer ---------- */
+async function ensureClient(){
+  if (sb) return sb;
+  if (!connected()) return null;
+  if (!window.supabase){
+    await new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      const timer = setTimeout(() => reject(new Error('the account library took too long to load — check the network')), 12000);
+      s.src = SB_LIB;
+      s.onload = () => { clearTimeout(timer); resolve(); };
+      s.onerror = () => { clearTimeout(timer); reject(new Error('the account library did not load — check the network')); };
+      document.head.appendChild(s);
+    });
+  }
+  sb = window.supabase.createClient(backend.url, backend.key, { auth: { persistSession: true, autoRefreshToken: true } });
+  return sb;
+}
+
+const rowOf = q => ({
+  id:q.id, type:q.type, ch:q.ch || '?', t:q.t || '',
+  q:q.q || '', o:q.o || null, a:(typeof q.a === 'number' ? q.a : null), e:q.e || '',
+  front:q.front || '', back:q.back || '', note:q.note || '',
+  pts:q.pts || null, model:q.model || '', src:q.src || '', img:q.img || ''
+});
+const itemOf = r => {
+  const o = { id:r.id, type:r.type, ch:r.ch || '?' };
+  if (r.type === 'card') { o.front = r.front || ''; o.back = r.back || ''; o.note = r.note || ''; }
+  else if (r.type === 'short') { o.q = r.q || ''; o.pts = r.pts || []; o.model = r.model || ''; }
+  else { o.q = r.q || ''; o.o = Array.isArray(r.o) ? r.o : []; o.a = r.a || 0; o.e = r.e || ''; }
+  if (r.t) o.t = r.t;
+  if (r.src) o.src = r.src;
+  if (r.img) o.img = r.img;
+  return o;
+};
+
+async function loadCloudBank(){
+  const c = await ensureClient();
+  if (!c) return false;
+  const { data, error } = await c.from('items').select('*');
+  if (error) throw error;
+  if (data && data.length){
+    bank = data.map(itemOf);
+    save(LS_BANK, bank);
+    meta = { ts: Date.now(), src: 'Cloud bank' };
+    save(LS_META, meta);
+  }
+  return true;
+}
+
+async function pushBank(){
+  const c = await ensureClient();
+  if (!c || !signedIn() || sess.role !== 'admin') return;
+  const { error } = await c.from('items').upsert(bank.map(rowOf), { onConflict: 'id' });
+  if (error) return toast('Cloud save failed: ' + error.message);
+  if (bank.length < 1200){
+    const ids = bank.map(q => q.id).join(',');
+    const { error: e2 } = await c.from('items').delete().not('id', 'in', `(${ids})`);
+    if (e2) console.warn('cleanup failed', e2.message);
+  }
+  meta.ts = Date.now(); save(LS_META, meta);
+}
+
+async function loadCloudProgress(){
+  const c = await ensureClient();
+  if (!c || !signedIn()) return;
+  const { data, error } = await c.from('progress').select('*').eq('user_id', sess.user.id);
+  if (error) throw error;
+  const p = {};
+  (data || []).forEach(r => { p[r.item_id] = { n:r.n || 0, r:r.r || 0, w:r.w || 0, box:r.box || 0, ts:Number(r.ts) || 0 }; });
+  prog = p;
+  save(LS_PROG, prog);
+}
+
+function queueProg(id){
+  if (!signedIn()) return;
+  dirtyProg[id] = prog[id];
+  clearTimeout(progTimer);
+  progTimer = setTimeout(flushProg, 1600);
+}
+
+async function flushProg(){
+  if (!Object.keys(dirtyProg).length) return;
+  const c = await ensureClient();
+  if (!c || !signedIn()){ dirtyProg = {}; return; }
+  const rows = Object.keys(dirtyProg).map(id => {
+    const p = dirtyProg[id] || {};
+    return { user_id: sess.user.id, item_id: id, n:p.n || 0, r:p.r || 0, w:p.w || 0, box:p.box || 0, ts:p.ts || 0 };
+  });
+  dirtyProg = {};
+  const { error } = await c.from('progress').upsert(rows, { onConflict: 'user_id,item_id' });
+  if (error) toast('Progress not synced: ' + error.message);
+}
+
+async function clearCloudProgress(){
+  const c = await ensureClient();
+  if (!c || !signedIn()) return;
+  const { error } = await c.from('progress').delete().eq('user_id', sess.user.id);
+  if (error) toast('Cloud history not cleared: ' + error.message);
+}
+
+async function loadRole(){
+  const c = await ensureClient();
+  if (!c || !sess.user){ sess.role = 'guest'; return; }
+  const { data } = await c.from('profiles').select('role').eq('id', sess.user.id).maybeSingle();
+  sess.role = (data && data.role) || 'student';
+  sess.email = sess.user.email || '';
+}
+
+async function signIn(email, pass){
+  const c = await ensureClient();
+  if (!c) throw new Error('connect the backend first');
+  const { data, error } = await c.auth.signInWithPassword({ email, password: pass });
+  if (error) throw error;
+  sess.user = data.user; await loadRole();
+  await loadCloudProgress();
+  closeModal(); toast(`Signed in as ${roleName()}`);
+  paintStatus(); render();
+}
+
+async function signUpAccount(email, pass){
+  const c = await ensureClient();
+  if (!c) throw new Error('connect the backend first');
+  const { data, error } = await c.auth.signUp({ email, password: pass });
+  if (error) throw error;
+  if (!data.session) throw new Error('check your inbox for the confirmation link, then sign in');
+  sess.user = data.session.user; await loadRole();
+  await loadCloudProgress();
+  closeModal(); toast(`Account created · ${roleName()}`);
+  paintStatus(); render();
+}
+
+async function signOutNow(){
+  await flushProg();
+  if (sb) await sb.auth.signOut();
+  sess = { user: null, email: '', role: 'guest' };
+  prog = {};                      /* the next visitor starts clean */
+  closeModal(); toast('Signed out — practising as a guest now');
+  paintStatus(); render();
+}
+
+async function bootAuth(){
+  if (!connected()){ sess.role = 'guest'; prog = {}; paintStatus(); return; }
+  try {
+    const c = await ensureClient();
+    const { data } = await c.auth.getSession();
+    if (data && data.session && data.session.user){
+      sess.user = data.session.user;
+      await loadRole();
+      await loadCloudProgress();
+    } else {
+      prog = {};
+    }
+    await loadCloudBank();
+  } catch (e){
+    toast('Account service: ' + e.message);
+  }
+  paintStatus();
+  render();
+}
+
+
+/* ---------- toast ---------- */
+let toastTimer;
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('on'), 1900);
+}
+
+/* ---------- icons ---------- */
+const ICON = {
+  home:'<path d="M3 10l9-7 9 7v10a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/>',
+  mcq:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h6M7 13h10M7 17h7"/>',
+  card:'<rect x="3" y="5" width="16" height="12" rx="2"/><path d="M7 21h14a2 2 0 002-2V8"/><path d="M9 10h6"/>',
+  short:'<path d="M4 4h16v12H8l-4 4z"/><path d="M8 9h8M8 12h5"/>',
+  bank:'<path d="M4 6h16M4 12h16M4 18h10"/>',
+  edit:'<path d="M4 20h4l10-10-4-4-10 10z"/><path d="M14 4l4 4"/>',
+  trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  down:'<path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>',
+  up:'<path d="M12 20V9M7 13l5-5 5 5M5 4h14"/>',
+  sync:'<path d="M4 12a8 8 0 0114-5M20 12a8 8 0 01-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+  reset:'<path d="M4 12a8 8 0 108-8v-4M4 4v4h4"/>'
+};
+const svg = (k, cls='') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="${cls}">${ICON[k]}</svg>`;
+
+/* ---------- navigation ---------- */
+const tabs = [
+  { r:'home',  n:'Home', s:'Home', i:'home' },
+  { r:'mcq',   n:'Multiple choice', s:'MCQ', i:'mcq' },
+  { r:'cards', n:'Flashcards', s:'Cards', i:'card' },
+  { r:'short', n:'Short answers', s:'Short', i:'short' },
+  { r:'manage',n:'Question bank', s:'Bank', i:'bank' }
+];
+function paintNav(active){
+  $('#tabs').innerHTML = tabs.map(t =>
+    `<a class="tab ${t.r===active?'on':''}" href="#/${t.r}">${svg(t.i)}<span class="ln">${t.n}</span><span class="sn">${t.s}</span></a>`
+  ).join('');
+  const rail = $('#railnav');
+  if (rail) rail.innerHTML = tabs.map(t =>
+    `<a class="${t.r===active?'on':''}" href="#/${t.r}">${svg(t.i)}<span>${t.n}</span>${
+      t.r==='manage' ? `<span class="rbadge">${bank.length}</span>` : ''}</a>`
+  ).join('');
+}
+
+const S = {};
+
+function go(route){ location.hash = '#/' + route; }
+window.addEventListener('hashchange', render);
+window.addEventListener('load', () => { if (!location.hash) go('home'); else render(); });
+
+function render(){
+  const route = (location.hash.replace(/^#\//, '') || 'home').split('?')[0];
+  paintNav(route);
+  paintStatus();
+  const map = { home:renderHome, mcq:renderMCQ, cards:renderCards, short:renderShort, manage:renderManage };
+  (map[route] || renderHome)();
+  window.scrollTo(0, 0);
+}
+
+/* ================= HOME ================= */
+function renderHome(){
+  const admin = isAdmin();
+  const total = bank.length;
+  const seen = practisedCount();
+  const due = dueCount();
+  const acc = accuracy();
+  const counts = { mcq:0, card:0, short:0 };
+  bank.forEach(q => counts[q.type] = (counts[q.type] || 0) + 1);
+
+  const wide = window.matchMedia('(min-width:1060px)').matches;
+  const allChap = CHAP_ORDER.filter(c => bank.some(q => q.ch === c));
+  const shown = (wide || S.homeAll) ? allChap : allChap.slice(0, 8);
+  const chaps = shown.map(c => {
+    const items = bank.filter(q => q.ch === c);
+    const ok = items.filter(q => isMastered(q.id)).length;
+    return `<div class="chap">
+      <span class="cname">${c}　${esc(CHAP_NAMES[c] || '')}</span>
+      <span class="cbar"><i style="width:${items.length ? Math.round(ok / items.length * 100) : 0}%"></i></span>
+      <span class="cnum">${ok}/${items.length}</span>
+    </div>`;
+  }).join('');
+
+    $('#view').innerHTML = `
+    <h2 class="view-t">Today’s session</h2>
+    <p class="view-sub">${total} questions built from the AS notes: definitions, chains of reasoning and essay technique. ${signedIn()
+      ? 'Your answers are saved to your account, so a session on any device picks up where the last one stopped.'
+      : 'As a guest, answers stay in this tab only and are gone when it closes — sign in to keep the record.'}</p>
+
+    <div class="stats">
+      <div class="stat"><b>${seen}</b><span>Practised</span></div>
+      <div class="stat"><b>${acc}%</b><span>Accuracy</span></div>
+      <div class="stat"><b>${due}</b><span>To review</span></div>
+      <div class="stat"><b>${total}</b><span>Questions</span></div>
+    </div>
+
+    <div class="sect-h"><h3>Practice</h3><small>Pick a mode</small></div>
+    <div class="modes">
+      <a class="mode" href="#/mcq"><div class="mt"><span class="mi">${svg('mcq')}</span>Multiple choice</div>
+        <div class="md">${counts.mcq} questions. Four options, instant marking and a worked explanation.</div></a>
+      <a class="mode" href="#/cards"><div class="mt"><span class="mi">${svg('card')}</span>Flashcards</div>
+        <div class="md">${counts.card} cards. Flip for the definition, then mark what you actually know.</div></a>
+      <a class="mode" href="#/short"><div class="mt"><span class="mi">${svg('short')}</span>Short answers</div>
+        <div class="md">${counts.short} tasks. Tick the mark scheme and mark yourself the way an examiner would.</div></a>
+      <a class="mode" href="#/manage"><div class="mt"><span class="mi">${svg('bank')}</span>Question bank</div>
+        <div class="md">Edit, import or rebuild the bank. Changes apply immediately.</div></a>
+    </div>
+
+    <div class="sect-h" style="margin:26px 0 8px"><h3>Chapter coverage</h3><small>Three correct in a row = mastered</small></div>
+    <div class="card pad" style="padding:10px 16px">
+      <div class="chapters3">${chaps || '<div class="empty">The bank is empty.</div>'}</div>
+      ${(!wide && allChap.length > 8) ? `<button class="btn ghost sm" id="allch" style="margin:10px 0 4px;width:100%">${S.homeAll ? 'Show fewer chapters' : 'Show all ' + allChap.length + ' chapters'}</button>` : ''}
+    </div>
+    <div class="note">Bank: ${total} questions · updated ${fmtTime(meta.ts)} · ${esc(meta.src || 'Built-in bank')}. ${admin
+      ? (connected()
+          ? 'Every import or edit is pushed to the shared bank, so all visitors get the new version.'
+          : 'Every import or edit is saved in this browser only; connect a backend to publish it.')
+      : 'The shared bank updates as soon as the admin publishes a change.'}</div>`;
+
+const all = $('#allch');
+  if (all) all.onclick = () => { S.homeAll = !S.homeAll; renderHome(); };
+}
+
+
+/* ---------- desktop side panel ---------- */
+function chapterStats(ch, type){
+  const items = bank.filter(q => q.ch === ch && q.type === type);
+  const done = items.filter(q => pOf(q.id).n > 0).length;
+  const ok = items.filter(q => isMastered(q.id)).length;
+  return { total: items.length, done, ok };
+}
+function sidePanel(ch, type){
+  const s = chapterStats(ch, type);
+  const tips = type === 'mcq'
+    ? ['Read the stem for the qualifier: “other things equal”, “in the short run”, “real terms”.',
+       'Eliminate on principle, not on memory: two options usually fail a definition or the direction of the chain.',
+       'When you miss one, read the explanation before moving on. That sentence is the mark you did not earn.']
+    : ['Definition → mechanism → application → judgement. Four moves, every time.',
+       '8 marks: define, build the chain, apply to the context, close with one conditional sentence.',
+       '12 marks: two developed sides, then evaluation on short run, scale, elasticity or implementation.'];
+  return `<aside class="side">
+    <div class="side-card">
+      <div class="side-h">${ch} · ${esc(CHAP_NAMES[ch] || '')}</div>
+      <div class="side-row"><span>Practised</span><b>${s.done}/${s.total}</b></div>
+      <div class="side-row"><span>Mastered</span><b>${s.ok}</b></div>
+      <div class="side-bar"><i style="width:${s.total ? Math.round(s.ok / s.total * 100) : 0}%"></i></div>
+    </div>
+    <div class="side-card">
+      <div class="side-h">Whole bank</div>
+      <div class="side-row"><span>Questions</span><b>${bank.length}</b></div>
+      <div class="side-row"><span>Practised</span><b>${practisedCount()}</b></div>
+      <div class="side-row"><span>Accuracy</span><b>${accuracy()}%</b></div>
+      <div class="side-row"><span>To review</span><b>${dueCount()}</b></div>
+    </div>
+    <div class="side-card side-tips">
+      <div class="side-h">${type === 'mcq' ? 'Reading the question' : 'How the marks work'}</div>
+      ${tips.map(t => `<p>${t}</p>`).join('')}
+    </div>
+  </aside>`;
+}
+
+/* ================= MULTIPLE CHOICE ================= */
+function mcqPool(chap){
+  let items = bank.filter(q => q.type === 'mcq' && (chap === 'all' || q.ch === chap));
+  items = shuffle(items);
+  return items;
+}
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function renderMCQ(){
+  if (!S.mcq || !S.mcq.pool) startMCQ('all');
+  const st = S.mcq;
+  const q = st.pool[st.i];
+  if (!q){ $('#view').innerHTML = `<h2 class="view-t">Multiple choice</h2><div class="empty">No multiple-choice questions in this chapter.</div>`; return; }
+
+  const chaps = ['all', ...CHAP_ORDER.filter(c => bank.some(x => x.type === 'mcq' && x.ch === c))];
+  const opts = q.o.map((text, idx) => {
+    let cls = 'opt';
+    if (st.picked != null){
+      if (idx === q.a) cls += ' good';
+      else if (idx === st.picked) cls += ' bad';
+    }
+    return `<button class="${cls}" data-pick="${idx}" ${st.picked != null ? 'disabled' : ''}>
+      <span class="k">${'ABCD'[idx]}</span><span>${esc(text)}</span></button>`;
+  }).join('');
+
+  const fb = st.picked != null ? `
+    <div class="fb ${st.picked === q.a ? '' : 'bad'}">
+      <div class="fbt ${st.picked === q.a ? 'ok' : 'no'}">${st.picked === q.a ? 'Correct' : 'Not quite — the answer is ' + 'ABCD'[q.a]}</div>
+      <div>${esc(q.e || '')}</div>
+    </div>` : '';
+
+  $('#view').innerHTML = `
+    <h2 class="view-t">Multiple choice</h2>
+    <p class="view-sub">${st.pool.length} questions · question ${st.i + 1} · anything you miss goes to the review list</p>
+    <div class="filterbar">
+      <label for="chSel">Chapter</label>
+      <select id="chSel">${chaps.map(c => `<option value="${c}"${st.chap===c?' selected':''}>${c==='all'?'All chapters':c+' · '+esc(CHAP_NAMES[c]||'')}</option>`).join('')}</select>
+      <span class="spacer"></span>
+      <button class="btn ghost sm" id="reshuffle">Shuffle</button>
+    </div>
+    <div class="pbar"><i style="width:${Math.round(st.i / st.pool.length * 100)}%"></i></div>
+    <div class="study">
+    <div class="card pad">
+      <div class="qmeta">
+        <span class="tag">${q.ch} ${esc(CHAP_NAMES[q.ch] || '')}</span>
+        ${q.t ? `<span class="tag amber">${esc(q.t)}</span>` : ''}
+        ${q.src ? `<span class="srctag">${esc(srcLabel(q.src))}</span>` : ''}
+        <span class="spacer"></span><span class="hint">${pOf(q.id).n ? pOf(q.id).n + (pOf(q.id).n === 1 ? ' attempt' : ' attempts') : 'not practised yet'}</span>
+      </div>
+      <div class="qtext">${esc(q.q)}</div>
+      ${q.img ? `<img class="qimg" src="${esc(q.img)}" alt="figure for this question">` : ''}
+      <div class="opts">${opts}</div>
+      ${fb}
+      <div class="row">
+        <button class="btn primary" id="next" ${st.picked == null ? 'disabled' : ''}>Next question</button>
+        <button class="btn ghost sm" id="skip">Skip</button>
+        <span class="spacer"></span>
+        <span class="hint keyhint">Press <span class="kbd">A</span>–<span class="kbd">D</span>, then <span class="kbd">Enter</span></span>
+      </div>
+    </div>
+    ${sidePanel(q.ch, 'mcq')}
+    </div>`;
+
+  $('#view').querySelectorAll('[data-pick]').forEach(b => b.onclick = () => pickMCQ(+b.dataset.pick));
+  $('#chSel').onchange = e => { startMCQ(e.target.value); renderMCQ(); };
+  $('#reshuffle').onclick = () => { startMCQ(st.chap); renderMCQ(); };
+  const next = () => {
+    st.i += 1; st.picked = null;
+    if (st.i >= st.pool.length){ st.i = 0; st.pool = mcqPool(st.chap); toast('Round complete — shuffled again.'); }
+    renderMCQ();
+  };
+  $('#next').onclick = next;
+  $('#skip').onclick = next;
+}
+function startMCQ(chap){ S.mcq = { pool: mcqPool(chap), i: 0, picked: null, chap }; }
+function pickMCQ(idx){
+  const st = S.mcq;
+  if (st.picked != null) return;
+  st.picked = idx;
+  const q = st.pool[st.i];
+  attempt(q.id, idx === q.a);
+  renderMCQ();
+}
+document.addEventListener('keydown', e => {
+  if (!S.mcq || (location.hash.replace(/^#\//,'') !== 'mcq')) return;
+  const k = e.key.toUpperCase();
+  if ('ABCD'.includes(k) && k.length === 1){ const i = 'ABCD'.indexOf(k); if (i < S.mcq.pool[S.mcq.i].o.length) pickMCQ(i); }
+  if (e.key === 'Enter' && S.mcq.picked != null) $('#next').click();
+});
+
+/* ================= FLASHCARDS ================= */
+function cardsPool(onlyDue){
+  let items = bank.filter(q => q.type === 'card');
+  if (onlyDue) items = items.filter(q => pOf(q.id).box < 3);
+  return shuffle(items);
+}
+function renderCards(){
+  if (!S.cards) S.cards = { queue: cardsPool(false), flipped: false, round: 1 };
+  const st = S.cards;
+  if (!st.queue.length){
+    const known = bank.filter(q => q.type === 'card' && pOf(q.id).box >= 3).length;
+    $('#view').innerHTML = `<h2 class="view-t">Flashcards</h2>
+      <p class="view-sub">Round finished. ${known} cards are now marked as known.</p>
+      <div class="row"><button class="btn primary" id="restart">Start another round</button>
+      <button class="btn" id="restartdue">Only unmastered</button></div>`;
+    $('#restart').onclick = () => { S.cards = { queue: cardsPool(false), flipped:false, round:1 }; renderCards(); };
+    $('#restartdue').onclick = () => { S.cards = { queue: cardsPool(true), flipped:false, round:1 }; renderCards(); };
+    return;
+  }
+  const q = st.queue[0];
+  $('#view').innerHTML = `
+    <h2 class="view-t">Flashcards</h2>
+    <p class="view-sub">${st.queue.length} cards left · tap the card to flip · anything you miss goes to the back of the queue</p>
+    <div class="row" style="margin:0 0 14px">
+      <button class="btn sm" id="due">Only unmastered</button>
+      <button class="btn sm" id="all">All cards</button>
+      <span class="spacer"></span><span class="hint">Round ${st.round}</span>
+    </div>
+    <div class="flipwrap">
+      <div class="flip ${st.flipped ? 'on' : ''}" id="flip">
+        <div class="face">
+          <div class="fl">${q.ch} · ${esc(CHAP_NAMES[q.ch] || '')}${q.t ? ' · ' + esc(q.t) : ''}${q.src ? ' · ' + esc(srcLabel(q.src)) : ''}</div>
+          <div class="fw">${esc(q.front)}</div>
+          <div class="fn">Tap to reveal the definition</div>
+        </div>
+        <div class="face back">
+          <div class="fl">Definition / key point</div>
+          <div class="fd">${esc(q.back)}</div>
+          ${q.note ? `<div class="fn">${esc(q.note)}</div>` : ''}
+        </div>
+      </div>
+    </div>
+    <p class="tapnote">${st.flipped ? 'Know it on the right, not yet on the left' : 'Tap the card to flip'}</p>
+    <div class="row" style="justify-content:space-between">
+      <button class="btn" id="no" ${st.flipped ? '' : 'disabled'} style="flex:1">Not yet</button>
+      <button class="btn primary" id="yes" ${st.flipped ? '' : 'disabled'} style="flex:1">Know it</button>
+    </div>
+    <div class="note">Recall it in two parts: the key term with its qualifier, then one clause linking it to its effect. That is enough for an AS definition mark.</div>`;
+
+  $('#flip').onclick = () => {
+    st.flipped = !st.flipped;
+    const card = $('#flip');
+    card.classList.toggle('on', st.flipped);
+    $('#yes').disabled = !st.flipped;
+    $('#no').disabled = !st.flipped;
+    const tip = document.querySelector('.tapnote');
+    if (tip) tip.textContent = st.flipped ? 'Know it on the right, not yet on the left' : 'Tap the card to flip';
+  };
+  $('#due').onclick = () => { S.cards = { queue: cardsPool(true), flipped:false, round:1 }; renderCards(); };
+  $('#all').onclick = () => { S.cards = { queue: cardsPool(false), flipped:false, round:1 }; renderCards(); };
+  $('#yes').onclick = () => { attempt(q.id, true); st.queue.shift(); st.flipped = false; st.round += 1; renderCards(); };
+  $('#no').onclick = () => { attempt(q.id, false); const moved = st.queue.shift(); st.queue.push(moved); st.flipped = false; st.round += 1; renderCards(); };
+}
+
+/* ================= SHORT ANSWERS ================= */
+function shortPool(chap){
+  return bank.filter(q => q.type === 'short' && (chap === 'all' || q.ch === chap));
+}
+function renderShort(){
+  if (!S.short) S.short = { i: 0, revealed: false, checks: {}, chap: 'all', drafts: {} };
+  const st = S.short;
+  const items = shortPool(st.chap);
+  if (!items.length){ $('#view').innerHTML = `<h2 class="view-t">Short answers</h2><div class="empty">No short-answer tasks in this chapter.</div>`; return; }
+  if (!st.pool || st.pool.length !== items.length) st.pool = items;
+  const q = st.pool[st.i] || st.pool[0];
+  const chaps = ['all', ...CHAP_ORDER.filter(c => bank.some(x => x.type === 'short' && x.ch === c))];
+  const pts = (q.pts || []).map((p, i) => `
+    <label class="pt"><input type="checkbox" data-i="${i}" ${st.checks[q.id] && st.checks[q.id][i] ? 'checked' : ''}>
+      <span>${esc(p.t)}</span><span class="sc">${p.s} mark${p.s > 1 ? 's' : ''}</span></label>`).join('');
+  const total = (q.pts || []).reduce((s, p) => s + p.s, 0);
+  const got = (q.pts || []).reduce((s, p, i) => s + (st.checks[q.id] && st.checks[q.id][i] ? p.s : 0), 0);
+
+  $('#view').innerHTML = `
+    <h2 class="view-t">Short answers</h2>
+    <p class="view-sub">Plan it first, then reveal the mark scheme and tick only what you actually wrote. 70 per cent counts as mastered.</p>
+    <div class="filterbar">
+      <label for="chSel">Chapter</label>
+      <select id="chSel">${chaps.map(c => `<option value="${c}"${st.chap===c?' selected':''}>${c==='all'?'All chapters':c+' · '+esc(CHAP_NAMES[c]||'')}</option>`).join('')}</select>
+      <span class="spacer"></span>
+      <button class="btn ghost sm" id="reshuffle">Shuffle</button>
+    </div>
+    <div class="pbar"><i style="width:${Math.round(st.i / st.pool.length * 100)}%"></i></div>
+    <div class="study">
+    <div class="card pad">
+      <div class="qmeta"><span class="tag">${q.ch} ${esc(CHAP_NAMES[q.ch] || '')}</span>${q.t?`<span class="tag amber">${esc(q.t)}</span>`:''}${q.src?`<span class="srctag">${esc(srcLabel(q.src))}</span>`:''}
+        <span class="spacer"></span><span class="hint">${(q.pts||[]).length} points · ${total} marks</span></div>
+      <div class="sa-q">${esc(q.q)}</div>
+      ${q.img ? `<img class="qimg" src="${esc(q.img)}" alt="figure for this question">` : ''}
+      <textarea id="sa" placeholder="Plan it here: definition → mechanism → trade-off → judgement (English or brief notes)">${esc((st.drafts||{})[q.id] || '')}</textarea>
+      <div class="row">
+        <button class="btn primary" id="reveal">${st.revealed ? 'Hide mark scheme' : 'Show mark scheme'}</button>
+        <span class="spacer"></span>
+        <span class="hint score">Your mark <b id="score">${got}</b>/${total}</span>
+      </div>
+      ${st.revealed ? `<div class="model">
+        <h4>Reference answer</h4><p>${esc(q.model || '')}</p>
+        <h4>Mark scheme — tick only what you wrote</h4><div class="pts">${pts}</div>
+        <div class="row"><button class="btn" id="save">Save this mark</button><button class="btn ghost" id="nextq">Next question</button></div>
+      </div>` : ''}
+    </div>
+    ${sidePanel(q.ch, 'short')}
+    </div>`;
+
+  $('#chSel').onchange = e => {
+    const d = st.drafts || {};
+    S.short = { pool: shortPool(e.target.value), i:0, revealed:false, checks:{}, chap:e.target.value, drafts:d };
+    renderShort();
+  };
+  $('#reshuffle').onclick = () => {
+    const d = st.drafts || {};
+    S.short = { pool: shuffle(items), i:0, revealed:false, checks:{}, chap:st.chap, drafts:d };
+    renderShort();
+  };
+  $('#sa').oninput = e => { st.drafts = st.drafts || {}; st.drafts[q.id] = e.target.value; };
+  $('#reveal').onclick = () => { st.revealed = !st.revealed; renderShort(); };
+  if (st.revealed){
+    $('#view').querySelectorAll('input[type=checkbox]').forEach(cb => cb.onchange = () => {
+      st.checks[q.id] = st.checks[q.id] || {};
+      st.checks[q.id][+cb.dataset.i] = cb.checked;
+      const g = (q.pts||[]).reduce((s,p,i)=>s+(st.checks[q.id][i]?p.s:0),0);
+      $('#score').textContent = g;
+    });
+    $('#save').onclick = () => {
+      const g = (q.pts||[]).reduce((s,p,i)=>s+(st.checks[q.id]&&st.checks[q.id][i]?p.s:0),0);
+      attemptScore(q.id, total ? g/total : 0);
+      toast(`Saved ${g}/${total} — ${g >= total * 0.7 ? 'marked as mastered' : 'added to review'}`);
+      st.i = (st.i + 1) % st.pool.length; st.revealed = false; renderShort();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    $('#nextq').onclick = () => { st.i = (st.i + 1) % st.pool.length; st.revealed = false; renderShort(); };
+  }
+}
+
+/* ================= QUESTION BANK ================= */
+function renderManage(){
+  if (!S.manage) S.manage = { q:'', type:'all', chap:'all' };
+  const m = S.manage;
+  let items = bank.filter(q =>
+    (m.type === 'all' || q.type === m.type) &&
+    (m.chap === 'all' || q.ch === m.chap) &&
+    (!m.q || ((q.q || q.front || '') + ' ' + (q.src || '')).toLowerCase().includes(m.q.toLowerCase()))
+  );
+  const TO = { mcq:0, card:1, short:2 };
+  items.sort((a,b) => (CHAP_ORDER.indexOf(a.ch) - CHAP_ORDER.indexOf(b.ch)) || (TO[a.type] - TO[b.type]));
+
+  const admin = isAdmin();
+  $('#view').innerHTML = `
+    <h2 class="view-t">Question bank</h2>
+    <p class="view-sub">${bank.length} questions · ${connected() ? (admin ? 'shared bank, admin editing' : 'shared bank, read-only') : (admin ? 'local bank, admin editing on this device' : 'not connected')} · updated ${fmtTime(meta.ts)}</p>
+
+    ${admin ? `
+    <div class="tools">
+      <button class="tool" id="add">${svg('plus')}New question</button>
+      <button class="tool" id="export">${svg('down')}Export JSON</button>
+      <button class="tool" id="import">${svg('up')}Import</button>
+      <button class="tool" id="rebuild">${svg('sync')}Rebuild from notes</button>
+    </div>` : `
+    <div class="note" style="margin-bottom:14px"><b>Read-only.</b> ${signedIn()
+      ? 'Signed in as a student — ask the admin to add or change questions.'
+      : 'Guest mode. Sign in as the admin to import, edit or delete questions.'}</b> You can still practise everything.</div>
+    <div class="row" style="margin-bottom:14px"><button class="btn sm" id="manage-in">${signedIn() ? 'Switch to the admin account' : 'Sign in'}</button></div>`}
+
+    <div class="searchrow">
+      <input type="search" id="q" placeholder="Search a question or term" value="${esc(m.q)}">
+      <select id="type">
+        <option value="all"${m.type==='all'?' selected':''}>All types</option>
+        <option value="mcq"${m.type==='mcq'?' selected':''}>Multiple choice</option>
+        <option value="card"${m.type==='card'?' selected':''}>Flashcards</option>
+        <option value="short"${m.type==='short'?' selected':''}>Short answers</option>
+      </select>
+      <select id="chap">
+        <option value="all"${m.chap==='all'?' selected':''}>All chapters</option>
+        ${CHAP_ORDER.map(c => `<option value="${c}"${m.chap===c?' selected':''}>${c} ${esc(CHAP_NAMES[c])}</option>`).join('')}
+      </select>
+    </div>
+
+    <div class="hint" style="margin-bottom:8px">${items.length} items</div>
+    <div class="list two">${items.map(q => `
+      <div class="item">
+        <div class="body">
+          <div class="qt">${esc(q.type === 'card' ? q.front : q.q)}</div>
+          <div class="mt">${[TYPE_NAME[q.type], q.ch + ' ' + esc(CHAP_NAMES[q.ch]||''), q.t ? esc(q.t) : '', pOf(q.id).n ? 'practised ' + pOf(q.id).n + '×' : 'not practised'].filter(Boolean).join('<span style="opacity:.4">·</span>')}</div>
+        </div>
+        <div class="acts">${admin ? `
+          <button class="iconbtn" data-edit="${q.id}" aria-label="Edit">${svg('edit')}</button>
+          <button class="iconbtn" data-del="${q.id}" aria-label="Delete">${svg('trash')}</button>` : ''}
+        </div>
+      </div>`).join('') || '<div class="empty">Nothing matches those filters.</div>'}
+    </div>
+
+    <div class="row" style="margin-top:16px">
+      ${admin ? `<button class="btn ghost sm" id="reset">${svg('reset')}Restore built-in bank</button>` : ''}
+      <span class="spacer"></span>
+      ${signedIn() ? `<button class="btn ghost sm" id="wipe">Clear my practice history</button>` : ''}
+    </div>
+
+    <div class="note">
+      <b>How updates reach everyone.</b> ${admin
+        ? (connected()
+            ? 'You are the admin: every import, edit or delete is written to the shared cloud bank, so all visitors see the new version on their next load. Students can practise the same questions but cannot change them.'
+            : 'Local admin mode: every import, edit or delete is saved in this browser. Connect a backend and sign in to publish the bank, so other devices and students see it.')
+        : 'The bank lives in the cloud and is readable by every visitor, so new material appears here as soon as the admin publishes it. Only the admin account can add or change questions.'}<br>
+      ${signedIn() ? 'Your answers are saved against your account — sign in on a phone or iPad and the same progress is there.' : 'Nothing is saved while you are a guest; sign in first if you want the record to follow you.'}
+    </div>
+  `;
+
+  $('#q').oninput = e => { m.q = e.target.value; renderManage(); setTimeout(()=>{ const el=$('#q'); el.focus(); el.setSelectionRange(el.value.length, el.value.length); },0); };
+  $('#type').onchange = e => { m.type = e.target.value; renderManage(); };
+  $('#chap').onchange = e => { m.chap = e.target.value; renderManage(); };
+  const on = (sel, fn) => { const el = $('#view').querySelector(sel); if (el) el.onclick = fn; };
+  if ($('#manage-in')) $('#manage-in').onclick = authDialog;
+  on('#add', () => editDialog(null));
+  $('#view').querySelectorAll('[data-edit]').forEach(b => b.onclick = () => editDialog(bank.find(q => q.id === b.dataset.edit)));
+  $('#view').querySelectorAll('[data-del]').forEach(b => b.onclick = () => {
+    const q = bank.find(x => x.id === b.dataset.del);
+    if (!q) return;
+    if (confirm('Delete this question? It disappears for everyone on the next load.')) {
+      bank = bank.filter(x => x.id !== q.id);
+      delete prog[q.id];
+      persistBank('Edited by admin'); persistProg(); toast('Deleted'); renderManage();
+    }
+  });
+  on('#export', exportBank);
+  on('#import', importBank);
+  on('#rebuild', rebuildDialog);
+  on('#reset', () => {
+    if (!confirm('Replace the current bank with the built-in one? Your edits will be lost, so export first if unsure.')) return;
+    bank = clone(BUILTIN); persistBank('Built-in bank'); toast('Built-in bank restored'); renderManage();
+  });
+  on('#wipe', () => {
+    if (!confirm('Clear your practice history? Questions are not affected.')) return;
+    prog = {}; persistProg();
+    if (signedIn()) clearCloudProgress();
+    toast('Practice history cleared'); renderManage();
+  });
+}
+
+/* ---------- dialogs ---------- */
+function modal(html){
+  const m = $('#modal');
+  m.hidden = false;
+  document.body.style.overflow = 'hidden';
+  m.innerHTML = `<div class="sheet">${html}</div>`;
+  m.onclick = e => { if (e.target === m) closeModal(); };
+}
+function closeModal(){
+  const m = $('#modal');
+  m.hidden = true; m.innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+/* ---------- account dialogs ---------- */
+function authDialog(){
+  const ok = connected();
+  modal(`
+    <h3>Save your progress</h3>
+    <p class="hint">Practising needs no account. As a guest, answers stay in this tab and disappear when it closes. Signing in keeps the record — and lets an admin edit the bank.</p>
+    ${ok ? '' : `<div class="note" style="margin:10px 0"><b>Backend not connected.</b> Accounts need a Supabase project. Set it up once, then everyone's progress follows their account on any device.</div>`}
+    <div class="field" style="margin-top:10px"><label>Email</label><input type="email" id="a-mail" autocomplete="username" placeholder="you@school.edu"></div>
+    <div class="field"><label>Password</label><input type="password" id="a-pass" autocomplete="current-password"></div>
+    <div class="row">
+      <button class="btn primary" id="a-in"${ok ? '' : ' disabled'}>Sign in</button>
+      <button class="btn" id="a-up"${ok ? '' : ' disabled'}>Create account</button>
+    </div>
+    <p class="hint" id="a-note"></p>
+    <div class="field" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line)">
+      <label>Admin passphrase</label>
+      <input type="password" id="a-owner" placeholder="enter the admin passphrase" autocomplete="off">
+      <div class="hint" style="margin-top:5px">No account needed. The passphrase unlocks import and editing on this device; the account above is only for saving progress.</div>
+    </div>
+    <div class="row"><button class="btn" id="a-unlock">Enter as admin</button></div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn ghost sm" id="a-setup">${ok ? 'Backend settings' : 'Connect backend'}</button>
+      <span class="spacer"></span>
+      <button class="btn ghost sm" id="a-cancel">Continue as guest</button>
+    </div>
+  `);
+  $('#a-cancel').onclick = closeModal;
+  $('#a-setup').onclick = backendDialog;
+  const run = async fn => {
+    const mail = $('#a-mail').value.trim(), pass = $('#a-pass').value;
+    const note = $('#a-note');
+    if (!mail || !pass) { note.textContent = 'Email and password are both needed.'; return; }
+    note.textContent = 'Please wait…';
+    try { await fn(mail, pass); }
+    catch (e){ note.textContent = e.message; }
+  };
+  $('#a-in').onclick = () => run(signIn);
+  $('#a-up').onclick = () => run(signUpAccount);
+  const enterAdmin = () => {
+    const val = $('#a-owner').value.trim(), note = $('#a-note');
+    if (!val){ note.textContent = 'Type the admin passphrase first.'; return; }
+    if (val !== OWNER_PASS){ note.textContent = 'That passphrase is not right.'; return; }
+    ownerRec = ownerRec && ownerRec.hash === ownerStamp(OWNER_PASS) ? ownerRec : { hash: ownerStamp(OWNER_PASS), ts: Date.now() };
+    save(LS_OWNER, ownerRec);
+    closeModal(); paintAcct(); render(); toast('Admin mode on for this device');
+  };
+  $('#a-unlock').onclick = enterAdmin;
+  $('#a-owner').onkeydown = e => { if (e.key === 'Enter'){ e.preventDefault(); enterAdmin(); } };
+}
+
+function accountDialog(){
+  const local = ownerOn() && !signedIn();
+  modal(`
+    <h3>${local ? 'Local admin' : roleName() + ' account'}</h3>
+    <p class="hint">${signedIn() ? esc(sess.email) : (local ? 'this browser only — no cloud account' : 'practising without an account')}</p>
+    <div class="note" style="margin:12px 0">
+      ${local
+        ? 'Admin mode is on for this device: import, edit and delete work, and the bank is saved in this browser. Sign in with the admin account as well to publish changes to the shared cloud bank.'
+        : signedIn()
+          ? `Your answers are stored against this account, so the same progress appears on any device you sign in from. ${isAdmin() ? 'You can import, edit and delete questions — those changes are shared with everyone.' : 'The question bank is read-only for students; ask the admin for changes.'}`
+          : 'Guest mode: questions and flashcards work fully, but nothing is written to storage. Sign in before starting a session you want to keep.'}
+    </div>
+    <div class="row">
+      ${signedIn() ? `<button class="btn primary" id="me-out">Sign out</button>` : `<button class="btn primary" id="me-in">Sign in</button>`}
+      ${ownerOn() ? `<button class="btn" id="me-owner">Turn off admin mode</button>` : ''}
+      <button class="btn" id="me-setup">Backend settings</button>
+    </div>
+  `);
+  if ($('#me-out')) $('#me-out').onclick = signOutNow;
+  if ($('#me-in')) $('#me-in').onclick = authDialog;
+  if ($('#me-owner')) $('#me-owner').onclick = () => {
+    if (!confirm('Turn off local admin mode on this device?')) return;
+    ownerRec = null; save(LS_OWNER, null);
+    closeModal(); paintAcct(); render(); toast('Admin mode off');
+  };
+  $('#me-setup').onclick = backendDialog;
+}
+
+const SCHEMA_SQL = [
+  '-- 9708 self-check · run once in Supabase → SQL editor',
+  'create table if not exists public.items (',
+  '  id text primary key, type text not null, ch text, t text,',
+  '  q text, o jsonb, a int, e text, front text, back text, note text,',
+  '  pts jsonb, model text, src text, img text, updated_at timestamptz default now());',
+  'alter table public.items add column if not exists src text;',
+  'alter table public.items add column if not exists img text;',
+  '',
+  'create table if not exists public.progress (',
+  '  user_id uuid references auth.users on delete cascade,',
+  '  item_id text, n int default 0, r int default 0, w int default 0,',
+  '  box int default 0, ts bigint default 0,',
+  '  primary key (user_id, item_id));',
+  '',
+  'create table if not exists public.profiles (',
+  '  id uuid primary key references auth.users on delete cascade,',
+  '  email text, role text not null default \'student\');',
+  '',
+  'create or replace function public.is_admin() returns boolean',
+  'language sql stable security definer as $$',
+  '  select exists (select 1 from public.profiles p where p.id = auth.uid() and p.role = \'admin\');',
+  '$$;',
+  '',
+  'alter table public.items enable row level security;',
+  'alter table public.progress enable row level security;',
+  'alter table public.profiles enable row level security;',
+  '',
+  'create policy items_read on public.items for select using (true);',
+  'create policy items_admin_ins on public.items for insert with check (public.is_admin());',
+  'create policy items_admin_upd on public.items for update using (public.is_admin()) with check (public.is_admin());',
+  'create policy items_admin_del on public.items for delete using (public.is_admin());',
+  '',
+  'create policy prog_read on public.progress for select using (user_id = auth.uid() or public.is_admin());',
+  'create policy prog_ins on public.progress for insert with check (user_id = auth.uid());',
+  'create policy prog_upd on public.progress for update using (user_id = auth.uid()) with check (user_id = auth.uid());',
+  '',
+  'create policy prof_read on public.profiles for select using (id = auth.uid() or public.is_admin());',
+  'create policy prof_admin on public.profiles for all using (public.is_admin()) with check (public.is_admin());',
+  '',
+  '-- the first account to sign up becomes the admin',
+  'create or replace function public.handle_new_user() returns trigger',
+  'language plpgsql security definer as $$',
+  'declare n int;',
+  'begin',
+  '  select count(*) into n from public.profiles where role = \'admin\';',
+  '  insert into public.profiles (id, email, role)',
+  '  values (new.id, new.email, case when n = 0 then \'admin\' else \'student\' end)',
+  '  on conflict (id) do nothing;',
+  '  return new;',
+  'end; $$;',
+  '',
+  'drop trigger if exists on_auth_user_created on auth.users;',
+  'create trigger on_auth_user_created after insert on auth.users',
+  '  for each row execute function public.handle_new_user();'
+].join('\n');
+
+function backendDialog(){
+  const cur = backend || { url:'', key:'' };
+  modal(`
+    <h3>Backend · Supabase</h3>
+    <p class="hint">Set up once. After that anyone can sign in and their progress follows them across devices; the first account created becomes the admin.</p>
+    <div class="field"><label>1 · Project URL</label><input id="b-url" placeholder="https://xxxx.supabase.co" value="${esc(cur.url || '')}"></div>
+    <div class="field"><label>2 · anon public key</label><input id="b-key" placeholder="eyJhbGciOi…" value="${esc(cur.key || '')}"></div>
+    <div class="field"><label>3 · Paste this into the SQL editor and run it</label>
+      <textarea id="b-sql" readonly style="min-height:150px;font-size:11.5px">${esc(SCHEMA_SQL)}</textarea></div>
+    <div class="row"><button class="btn sm" id="b-copy">Copy SQL</button><span class="hint">Then in Authentication → Providers, switch “Confirm email” off so sign-up is instant.</span></div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn primary" id="b-save">Save and connect</button>
+      ${connected() ? '<button class="btn" id="b-off">Disconnect</button>' : ''}
+      <button class="btn ghost" id="b-cancel">Close</button>
+    </div>
+    <p class="hint" id="b-note"></p>
+  `);
+  $('#b-cancel').onclick = closeModal;
+  $('#b-copy').onclick = () => {
+    const ta = $('#b-sql');
+    ta.select();
+    (navigator.clipboard ? navigator.clipboard.writeText(SCHEMA_SQL) : Promise.resolve())
+      .then(() => toast('SQL copied')).catch(() => toast('Select the text and copy it'));
+  };
+  $('#b-save').onclick = async () => {
+    const url = $('#b-url').value.trim().replace(/\/$/, '');
+    const key = $('#b-key').value.trim();
+    const note = $('#b-note');
+    if (!/^https:\/\/.+\.supabase\.co$/.test(url) || key.length < 20){
+      note.textContent = 'That looks incomplete — the URL ends in .supabase.co and the key is the long anon string.';
+      return;
+    }
+    note.textContent = 'Connecting…';
+    backend = { url, key }; save(LS_BACKEND, backend);
+    sb = null;
+    try {
+      const c = await ensureClient();
+      const { error } = await c.from('items').select('id', { count:'exact' }).limit(1);
+      if (error) throw error;
+      note.textContent = 'Connected. ';
+      closeModal();
+      await bootAuth();
+      toast('Backend connected');
+    } catch (e){
+      note.textContent = 'Not working yet: ' + e.message + ' — run the SQL above first.';
+    }
+  };
+  if ($('#b-off')) $('#b-off').onclick = () => {
+    backend = null; save(LS_BACKEND, null); sb = null;
+    sess = { user: null, email: '', role: 'guest' };
+    closeModal(); toast('Backend disconnected'); paintStatus(); render();
+  };
+}
+
+
+function editDialog(q){
+  if (!isAdmin()){ toast(connected() ? 'Only the admin account can change the bank' : 'Connect the backend and sign in as admin to edit the bank'); return; }
+  const isNew = !q;
+  const cur = q || { id: uid(), type:'mcq', ch:'1.1', t:'', q:'', o:['','','',''], a:0, e:'', front:'', back:'', note:'', pts:[{t:'',s:2}], model:'', src:'' };
+  const chaps = CHAP_ORDER.map(c => `<option value="${c}"${cur.ch===c?' selected':''}>${c} ${esc(CHAP_NAMES[c])}</option>`).join('');
+
+  const bodyFor = type => {
+    if (type === 'mcq') return `
+      <div class="field"><label>Question</label><textarea id="f-q">${esc(cur.q)}</textarea></div>
+      ${[0,1,2,3].map(i => `<div class="field"><label>Option ${'ABCD'[i]}</label><input type="text" id="f-o${i}" value="${esc(cur.o[i] || '')}"></div>`).join('')}
+      <div class="field"><label>Correct option</label><select id="f-a">${[0,1,2,3].map(i=>`<option value="${i}"${cur.a===i?' selected':''}>${'ABCD'[i]}</option>`).join('')}</select></div>
+      <div class="field"><label>Explanation</label><textarea id="f-e">${esc(cur.e || '')}</textarea></div>`;
+    if (type === 'card') return `
+      <div class="field"><label>Front (term)</label><input type="text" id="f-front" value="${esc(cur.front || '')}"></div>
+      <div class="field"><label>Back (definition)</label><textarea id="f-back">${esc(cur.back || '')}</textarea></div>
+      <div class="field"><label>Note (optional)</label><input type="text" id="f-note" value="${esc(cur.note || '')}"></div>`;
+    return `
+      <div class="field"><label>Question</label><textarea id="f-q">${esc(cur.q || '')}</textarea></div>
+      <div class="field"><label>Mark scheme — one point per line as point::marks</label><textarea id="f-pts" style="min-height:110px">${esc((cur.pts||[]).map(p=>p.t+'::'+p.s).join('\n'))}</textarea></div>
+      <div class="field"><label>Reference answer</label><textarea id="f-model" style="min-height:110px">${esc(cur.model || '')}</textarea></div>
+      <div class="field"><label>Figure (optional — URL or upload)</label><input type="text" id="f-img" value="${esc(cur.img || '')}" placeholder="https://… or leave blank and upload below">
+        <input type="file" id="f-imgfile" accept="image/*" style="margin-top:6px"></div>
+      <div class="field"><label>Source tag (optional)</label><input type="text" id="f-src" value="${esc(cur.src || '')}" placeholder="9708_m26_qp_12_Q10">
+        <div class="hint" style="margin-top:4px">9708_series_qp_XY_Qn — series: s = May/June, m = Feb/March, w = Oct/Nov; XY: 11–13 Paper 1, 21–23 Paper 2. Do not add the answer letter: students see this tag.</div></div>`;
+  };
+
+  modal(`
+    <h3>${isNew ? 'New question' : 'Edit question'}</h3>
+    <div class="field"><label>Type</label><select id="f-type">
+      ${['mcq','card','short'].map(t=>`<option value="${t}"${cur.type===t?' selected':''}>${TYPE_NAME[t]}</option>`).join('')}
+    </select></div>
+    <div class="field"><label>Chapter</label><select id="f-ch">${chaps}</select></div>
+    <div class="field"><label>Tag (optional, e.g. “exam technique”, “common trap”)</label><input type="text" id="f-t" value="${esc(cur.t || '')}"></div>
+    <div id="dyn">${bodyFor(cur.type)}</div>
+    <div class="row">
+      <button class="btn primary" id="saveq">Save</button>
+      <button class="btn" id="cancel">Cancel</button>
+      ${isNew ? '' : '<span class="spacer"></span><button class="btn ghost" id="delq">Delete</button>'}
+    </div>
+    <p class="hint" style="margin-top:10px">Changes apply immediately. A multiple-choice question needs at least two options; a flashcard needs a front and a back.</p>
+  `);
+
+  $('#f-type').onchange = e => { cur.type = e.target.value; $('#dyn').innerHTML = bodyFor(e.target.value); };
+  $('#cancel').onclick = closeModal;
+  if (!isNew) $('#delq').onclick = () => {
+    if (!confirm('Delete this question?')) return;
+    bank = bank.filter(x => x.id !== cur.id); delete prog[cur.id];
+    persistBank('Edited in the app'); persistProg(); closeModal(); toast('Deleted'); renderManage();
+  };
+  $('#saveq').onclick = async () => {
+    const type = $('#f-type').value;
+    const item = { id: cur.id, type, ch: $('#f-ch').value, t: $('#f-t').value.trim() };
+    if (type === 'mcq') {
+      item.q = $('#f-q').value.trim();
+      item.o = [0,1,2,3].map(i => $('#f-o' + i).value.trim()).filter(Boolean);
+      item.a = Math.min(+$('#f-a').value, item.o.length - 1);
+      item.e = $('#f-e').value.trim();
+      if (!item.q || item.o.length < 2) return toast('A question and at least two options are required');
+    } else if (type === 'card') {
+      item.front = $('#f-front').value.trim();
+      item.back = $('#f-back').value.trim();
+      item.note = $('#f-note').value.trim();
+      if (!item.front || !item.back) return toast('Front and back are required');
+    } else {
+      item.q = $('#f-q').value.trim();
+      item.model = $('#f-model').value.trim();
+      if ($('#f-src')) item.src = $('#f-src').value.trim();
+      if ($('#f-img')) item.img = $('#f-img').value.trim();
+      const imgFile = $('#f-imgfile') && $('#f-imgfile').files[0];
+      if (imgFile){
+        item.img = await new Promise((res, rej) => {
+          const fr = new FileReader();
+          fr.onload = () => res(fr.result);
+          fr.onerror = () => rej(new Error('could not read the image'));
+          fr.readAsDataURL(imgFile);
+        });
+      }
+      item.pts = $('#f-pts').value.split('\n').map(l => {
+        const parts = l.split('::');
+        if (!parts[0].trim()) return null;
+        return { t: parts[0].trim(), s: +(parts[1] || 2) };
+      }).filter(Boolean);
+      if (item.pts.length === 0) item.pts = [{ t:'Accurate definition', s:2 }, { t:'Mechanism explained', s:3 }, { t:'Evaluation and judgement', s:3 }];
+      if (!item.q) return toast('Question text is required');
+    }
+    const idx = bank.findIndex(x => x.id === item.id);
+    if (idx >= 0) bank[idx] = item; else bank.push(item);
+    persistBank('Edited in the app');
+    closeModal(); toast('Saved — live now'); renderManage();
+  };
+}
+
+/* ---------- import / export ---------- */
+function exportBank(){
+  const blob = new Blob([JSON.stringify(bank, null, 2)], { type:'application/json' });
+  const a = document.createElement('a');
+  const d = new Date();
+  a.href = URL.createObjectURL(blob);
+  a.download = `9708-bank-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  toast('JSON exported');
+}
+
+/* ---------- import: JSON, PDF or pasted text ---------- */
+function detectChapter(s){
+  const t = ' ' + String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/\s+/g, ' ').trim() + ' ';
+  let best = { ch:'?', score:0 };
+  CHAP_ORDER.forEach(c => {
+    if (c === '?') return;
+    let sc = 0;
+    (CHAP_HINTS[c] || []).forEach(ph => {
+      const words = ph.split(' ').length;
+      if (t.indexOf(' ' + ph + ' ') >= 0) sc += words + (words > 1 ? 0.5 : 0);
+    });
+    if (sc > best.score) best = { ch:c, score:sc };
+  });
+  return best;
+}
+
+function importBank(){
+  if (!isAdmin()){ toast(connected() ? 'Only the admin account can change the bank' : 'Connect the backend and sign in as admin to edit the bank'); return; }
+  let parsed = [];
+  const chOpts = CHAP_ORDER.map(c => `<option value="${c}">${c}${CHAP_NAMES[c] ? ' ' + esc(CHAP_NAMES[c]) : ''}</option>`).join('');
+  modal(`
+    <h3>Import questions</h3>
+    <p class="hint">Pick your question paper and, if the answers live in a separate file, pick that file in the same step — answers are matched to questions by number. Everything is read inside this browser; nothing is uploaded.</p>
+    <div class="field" style="margin-top:12px"><label>Question paper (PDF, JSON or text — several allowed)</label><input type="file" id="f-file" multiple accept=".json,.pdf,.txt,.md,.csv"></div>
+    <div class="field" style="margin-top:0"><label>Answer key — separate file, optional (PDF or text)</label><input type="file" id="f-key" multiple accept=".pdf,.txt,.md,.csv"></div>
+    <div class="row" style="margin-top:0"><button class="btn sm" id="read-file">Read these files</button><span class="hint" id="file-note">answers are matched to questions by number</span></div>
+    <div class="field" style="margin-top:12px"><label>Chapter</label><select id="f-ch3"><option value="auto">Auto-detect per question (recommended)</option>${chOpts}</select></div>
+    <div class="field" style="margin-top:0"><label>Or paste the text</label><textarea id="f-text" style="min-height:130px" placeholder="Question paper and answer key can be pasted one after the other.&#10;&#10;1. A subsidy paid to producers will, other things equal&#10;A. shift supply to the right&#10;B. shift supply to the left&#10;C. shift demand to the right&#10;D. leave price unchanged&#10;&#10;Answers: 1 A 2 B"></textarea></div>
+    <div id="preview"></div>
+    <div class="row"><button class="btn primary" id="do-append" disabled>Append to bank</button><button class="btn" id="do-replace" disabled>Replace bank</button><button class="btn ghost" id="cancel2">Cancel</button></div>
+    <p class="hint" style="margin-top:10px">Expected shape: a numbered stem, one option per line (A–D), then “Answer: B” and optionally “Explanation:”. If the answers live in another paper, put that file in the answer-key slot: “Answers: 1 B 2 C 3 A”, one “1 B” per line, a two-column table, or just a column of letters (read in question order) all work. Chapters are detected from the wording of each question and can be corrected in the preview. Scanned PDFs need OCR first.</p>
+  `);
+
+  const showPreview = () => {
+    const box = $('#preview');
+    const n = parsed.length;
+    if (!n){ box.innerHTML = ''; $('#do-append').disabled = true; $('#do-replace').disabled = true; return; }
+    const groups = [], map = {};
+    parsed.forEach((p, i) => {
+      const k = p.ch || '?';
+      if (!map[k]) { map[k] = { ch:k, items:[] }; groups.push(map[k]); }
+      map[k].items.push(i);
+    });
+    groups.sort((a, b) => CHAP_ORDER.indexOf(a.ch) - CHAP_ORDER.indexOf(b.ch));
+    const opts = ch => CHAP_ORDER.map(c => `<option value="${c}"${c === ch ? ' selected' : ''}>${c}${CHAP_NAMES[c] ? ' · ' + esc(CHAP_NAMES[c]) : ''}</option>`).join('');
+    box.innerHTML = `<div class="preview">
+      <div class="side-h">${n} item${n > 1 ? 's' : ''} found · filed into ${groups.length} chapter${groups.length > 1 ? 's' : ''}</div>
+      <div style="max-height:250px;overflow:auto">
+      ${groups.map((g, gi) => `<div class="pv" style="display:block">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <b>${esc(g.ch)}${CHAP_NAMES[g.ch] ? ' · ' + esc(CHAP_NAMES[g.ch]) : ''}</b>
+          <span class="hint">${g.items.length} item${g.items.length > 1 ? 's' : ''}</span>
+          <select data-g="${gi}" style="max-width:230px;padding:4px 6px">${opts(g.ch)}</select>
+        </div>
+        <div class="hint" style="margin-top:3px">${esc(((parsed[g.items[0]].q || parsed[g.items[0]].front) || '').slice(0, 105))}</div>
+      </div>`).join('')}
+      </div>
+      <div class="hint" style="margin-top:6px">Change a chapter above to re-file that whole group; individual items can be edited later in Bank.</div>
+      ${lastParse.noAnswer ? `<div class="hint" style="margin-top:4px;color:#A9762F">${lastParse.noAnswer} question${lastParse.noAnswer > 1 ? 's' : ''} had no answer in the two files, so ${lastParse.noAnswer > 1 ? 'they were' : 'it was'} left out. Check that the answer key covers the same numbers.</div>` : ''}
+    </div>`;
+    box.querySelectorAll('select[data-g]').forEach(sel => {
+      sel.onchange = () => {
+        const g = groups[+sel.dataset.g];
+        g.items.forEach(i => { parsed[i].ch = sel.value; });
+        showPreview();
+      };
+    });
+    $('#do-append').disabled = false; $('#do-replace').disabled = false;
+  };
+
+  const setParsed = items => { parsed = items; showPreview(); };
+
+  const importNow = replace => {
+    if (!parsed.length) return;
+    const fresh = parsed.map(p => ({ ...p, id: uid() }));
+    if (replace){
+      bank = fresh;
+    } else {
+      const byText = new Set(bank.map(q => (q.q || q.front || '').trim().toLowerCase()));
+      const add = fresh.filter(p => !byText.has((p.q || p.front || '').trim().toLowerCase()));
+      bank = bank.concat(add);
+      if (!add.length) return toast('All of these are already in the bank');
+    }
+    persistBank(replace ? 'Imported file' : 'Imported and appended');
+    closeModal(); toast(`Imported ${fresh.length} items`); render();
+  };
+
+  $('#cancel2').onclick = closeModal;
+  $('#do-append').onclick = () => importNow(false);
+  $('#do-replace').onclick = () => importNow(true);
+
+  $('#read-file').onclick = async () => {
+    const fs = Array.from($('#f-file').files || []);
+    const ks = Array.from($('#f-key').files || []);
+    if (!fs.length) return toast('Choose a question paper first');
+    const note = $('#file-note');
+    try {
+      const jsonItems = [], textParts = [], keyParts = [];
+      const anyPdf = fs.concat(ks).some(f => f.name.toLowerCase().endsWith('.pdf'));
+      if (anyPdf) note.textContent = 'Loading the PDF reader…';
+      for (let i = 0; i < fs.length; i++){
+        const f = fs[i], name = f.name.toLowerCase();
+        note.textContent = `Reading question paper ${i + 1} of ${fs.length}: ${f.name}…`;
+        if (name.endsWith('.json')){
+          const data = JSON.parse(await f.text());
+          const arr = Array.isArray(data) ? data : (data.items || data.bank || []);
+          jsonItems.push(...(arr || []).filter(x => x && x.type && (x.q || x.front)));
+          continue;
+        }
+        const txt = name.endsWith('.pdf') ? await pdfToText(f) : await f.text();
+        if (txt.trim()) textParts.push(txt);
+      }
+      for (let i = 0; i < ks.length; i++){
+        const f = ks[i], name = f.name.toLowerCase();
+        note.textContent = `Reading answer key ${i + 1} of ${ks.length}: ${f.name}…`;
+        const txt = name.endsWith('.pdf') ? await pdfToText(f) : await f.text();
+        if (txt.trim()) keyParts.push(txt);
+      }
+      const mode = $('#f-ch3').value;
+      if (jsonItems.length){
+        const valid = jsonItems.map(x => ({ ...x, id: uid(), ch: x.ch || (mode === 'auto' ? detectChapter((x.q || x.front || '') + ' ' + (x.o || []).join(' ')).ch : mode) }));
+        note.textContent = `JSON bank ready: ${valid.length} items`;
+        return setParsed(valid);
+      }
+      if (!textParts.length) throw new Error('no text found — a scanned PDF needs OCR first');
+      const combined = textParts.join('\n\n');
+      $('#f-text').value = combined.slice(0, 220000);
+      const keyObj = keyParts.length ? parseAnswerKey(keyParts.join('\n\n')) : null;
+      const items = parseItems(combined, mode, keyObj);
+      const miss = lastParse.noAnswer ? ` · ${lastParse.noAnswer} without an answer` : '';
+      note.textContent = `Read ${combined.length} characters${keyParts.length ? ' + answer key' : ''} · ${items.length} item(s) parsed${miss}${items.length ? '' : ' — check the shape shown below the box'}`;
+      setParsed(items);
+    } catch (e) {
+      note.textContent = 'Could not read: ' + e.message;
+      toast('Could not read: ' + e.message);
+    }
+  };
+
+  $('#f-ch3').onchange = () => {
+    const text = $('#f-text').value;
+    if (text.trim()) setParsed(parseItems(text, $('#f-ch3').value));
+  };
+
+  $('#f-text').addEventListener('input', () => {
+    const t = $('#f-text').value.trim();
+    if (!t){ parsed = []; showPreview(); return; }
+    setParsed(parseItems(t, $('#f-ch3').value));
+    if (!parsed.length) $('#preview').innerHTML = '<div class="preview"><div class="hint">No questions recognised yet. Each option needs its own line and an “Answer: A” line, or an answer key such as “1 A 2 B”.</div></div>';
+  });
+}
+
+async function pdfToText(file){
+  if (!window.pdfjsLib){
+    await new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = 'https://fastly.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+      s.onload = resolve;
+      s.onerror = () => reject(new Error('the PDF reader did not load'));
+      document.head.appendChild(s);
+    });
+  }
+  const lib = window.pdfjsLib;
+  lib.GlobalWorkerOptions.workerSrc = 'https://fastly.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+  const doc = await lib.getDocument({ data: await file.arrayBuffer() }).promise;
+  const out = [];
+  for (let p = 1; p <= doc.numPages; p++){
+    const page = await doc.getPage(p);
+    const tc = await page.getTextContent();
+    const rows = {}, order = [];
+    tc.items.forEach(it => {
+      if (!it.str || !it.str.trim()) return;
+      const y = Math.round(it.transform[5] / 3) * 3;
+      if (!rows[y]) { rows[y] = []; order.push(y); }
+      rows[y].push(it);
+    });
+    order.sort((a, b) => b - a);
+    order.forEach(y => {
+      const line = rows[y].sort((a, b) => a.transform[4] - b.transform[4]).map(i => i.str).join(' ').replace(/\s+/g, ' ').trim();
+      if (line) out.push(line);
+    });
+    out.push('');
+  }
+  return out.join('\n');
+}
+
+let lastParse = { total:0, noAnswer:0 };
+
+/* pull answers out of a separate answer paper / mark scheme */
+function parseAnswerKey(text){
+  const byNum = {}, seq = [];
+  String(text || '').split(/\r?\n/).forEach(raw => {
+    let l = raw.replace(/\u00a0/g, ' ').replace(/\|/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!l) return;
+    if (/^(answers?|answer key|key|mark scheme|correct answers|solution)s?\s*$/i.test(l)) return;
+    if (/^(answers?|answer key|key|mark scheme|correct answers)\.{0,3}\s*$/i.test(l)) return;
+    const pairs = l.match(/(?:^|[^A-Za-z])(\d{1,3})\s*[.)\-–:]*\s*(?:option\s*)?([A-D])/gi);
+    if (pairs && pairs.length){
+      pairs.forEach(p => {
+        const m = p.match(/(\d{1,3})\s*[.)\-–:]*\s*(?:option\s*)?([A-D])/i);
+        if (m) byNum[+m[1]] = m[2].toUpperCase();
+      });
+      return;
+    }
+    if (/^[A-D]$/i.test(l)) seq.push(l.toUpperCase());
+  });
+  return { byNum, seq };
+}
+
+function parseItems(text, chMode, answerKey){
+  const lines = text.split(/\r?\n/).map(l => l.replace(/\u00a0/g, ' ').trim());
+  const key = {};
+  const seq = [];
+  if (answerKey && answerKey.byNum) Object.keys(answerKey.byNum).forEach(n => { key[n] = answerKey.byNum[n]; });
+  if (answerKey && answerKey.seq && answerKey.seq.length) seq.push(...answerKey.seq);
+  const readKey = l => {
+    (l.match(/(?:q|question)?\s*(\d{1,3})\s*[.)\-–:]?\s*\(?([A-D])\)?/gi) || []).forEach(m => {
+      const mm = m.match(/(\d{1,3})\s*[.)\-–:]?\s*\(?([A-D])/i);
+      if (mm) key[+mm[1]] = mm[2].toUpperCase();
+    });
+  };
+  lines.forEach(l => {
+    if (!l) return;
+    const header = /^[\s]*(answers?|answer key|key|mark scheme|correct answers)[\s:.]/i.test(l);
+    const inlineKey = /^\s*(\d{1,3}\s*[-–:.)]?\s*[A-D]\b[\s,;/]+){3,}/i.test(l);
+    const single = /^\(?\s*(?:q|question)?\s*(\d{1,3})\s*[.)\-–:]?\s*\(?([A-D])\)?\s*$/i.test(l);
+    if (!header && !inlineKey && !single) return;
+    readKey(l);
+  });
+
+  const startRe = /^(\d{1,3})\s*[.)]\s*(.+)$/;
+  const optRe = /^\(?([A-Da-d])[.)]\s*(.+)$/;
+  const blocks = [];
+  let cur = null;
+  lines.forEach(l => {
+    if (!l) return;
+    if (/^(answers?|answer key|key|mark scheme|correct answers)\b/i.test(l)) return;
+    const ms = l.match(startRe);
+    if (ms && (!cur || cur.opts.length > 1 || cur.answer || cur.exp)){
+      cur = { num: +ms[1], stem: [ms[2]], opts: [], answer: '', exp: '' };
+      blocks.push(cur); return;
+    }
+    if (!cur) return;
+    const mo = l.match(optRe);
+    if (mo) { cur.opts.push({ k: mo[1].toUpperCase(), t: mo[2].trim() }); return; }
+    const ma = l.match(/^(?:correct answer|answer|ans)\s*[:\-–]?\s*\(?([A-D])\)?(.*)$/i);
+    if (ma) { cur.answer = ma[1].toUpperCase(); return; }
+    const me = l.match(/^(?:explanation|reason|why|comment)\s*[:\-–]\s*(.+)$/i);
+    if (me) { cur.exp = (cur.exp ? cur.exp + ' ' : '') + me[1]; return; }
+    if (cur.exp) cur.exp += ' ' + l;
+    else if (!cur.opts.length) cur.stem.push(l);
+    else cur.exp = l;
+  });
+
+  const field = (stem, opts) => {
+    if (chMode && chMode !== 'auto') return chMode;
+    const q = detectChapter(stem);
+    if (q.score > 0) return q.ch;
+    return detectChapter(stem + ' ' + (opts || '')).ch;
+  };
+
+  /* a key that is only a column of letters is matched to questions in number order */
+  const seqKey = {};
+  if (seq.length){
+    const nums = blocks.filter(b => b.opts.length >= 2).map(b => b.num).sort((a, b) => a - b);
+    nums.forEach((n, i) => { if (seq[i]) seqKey[n] = seq[i]; });
+  }
+
+  const mcq = [];
+  let noAnswer = 0;
+  blocks.forEach(b => {
+    if (b.opts.length < 2) return;
+    const ans = b.answer || key[b.num] || seqKey[b.num];
+    if (!ans) { noAnswer++; return; }
+    const idx = b.opts.findIndex(o => o.k === ans);
+    const stem = b.stem.join(' ').replace(/\s+/g, ' ').trim();
+    mcq.push({
+      id: uid(), type: 'mcq', t: '',
+      ch: field(stem, b.opts.map(o => o.t).join(' ')),
+      q: stem,
+      o: b.opts.map(o => o.t),
+      a: idx >= 0 ? idx : 0,
+      e: b.exp.trim()
+    });
+  });
+
+  const cards = [];
+  if (!mcq.length){
+    parseDefTable(text).forEach(r => cards.push({ id: uid(), type: 'card', t: '', ch: field(r.front + ' ' + r.back), front: r.front, back: r.back, note: r.note }));
+  }
+  lastParse = { total: mcq.length + cards.length, noAnswer };
+  return mcq.concat(cards);
+}
+
+function rebuildDialog(){
+  if (!isAdmin()){ toast(connected() ? 'Only the admin account can change the bank' : 'Connect the backend and sign in as admin to edit the bank'); return; }
+  modal(`
+    <h3>Rebuild flashcards from notes</h3>
+    <p class="hint">Paste the definition table from the notes. Each row becomes one card; a card with the same front is updated rather than duplicated.</p>
+    <div class="field" style="margin-top:12px"><textarea id="f-md" style="min-height:170px" placeholder="| Term | Exam-ready definition | Note |
+| --- | --- | --- |
+| Scarcity | Wants are unlimited but resources are limited. | Relative concept |
+| PPC | ... | ... |"></textarea></div>
+    <div class="field"><label>Chapter for these cards</label><select id="f-ch2">${CHAP_ORDER.map(c=>`<option value="${c}">${c} ${esc(CHAP_NAMES[c])}</option>`).join('')}</select></div>
+    <div class="row"><button class="btn primary" id="do-rebuild">Parse and merge</button><button class="btn" id="cancel3">Cancel</button></div>
+  `);
+  $('#cancel3').onclick = closeModal;
+  $('#do-rebuild').onclick = () => {
+    const text = $('#f-md').value;
+    const ch = $('#f-ch2').value;
+    const rows = parseDefTable(text);
+    if (!rows.length) return toast('Nothing parsed — check that the lines are pipe-separated');
+    let added = 0, updated = 0;
+    rows.forEach(r => {
+      const exist = bank.find(x => x.type === 'card' && x.front.trim() === r.front.trim());
+      if (exist) { exist.back = r.back; if (r.note) exist.note = r.note; exist.ch = ch; updated++; }
+      else { bank.push({ id: uid(), type:'card', ch, t:'', front:r.front, back:r.back, note:r.note }); added++; }
+    });
+    persistBank('Rebuilt from notes'); closeModal(); toast(`Added ${added}, updated ${updated}`); renderManage();
+  };
+}
+
+function parseDefTable(text){
+  const out = [];
+  text.split('\n').forEach(line => {
+    let t = line.trim();
+    if (!t) return;
+    if (t.startsWith('|')) {
+      const cells = t.replace(/^\|/, '').replace(/\|$/, '').split('|').map(s => s.trim().replace(/\*\*/g, ''));
+      if (cells.length < 2) return;
+      if (cells.join('').replace(/[-: ]/g, '') === '') return;
+      if (/term|definition|note|术语/i.test(cells[0]) && /definition|note|定义|提醒/i.test(cells[1])) return;
+      out.push({ front: cells[0], back: cells[1], note: cells[2] || '' });
+    } else if (/^[^:：]{1,40}[:：]/.test(t)) {
+      const i = t.search(/[:：]/);
+      out.push({ front: t.slice(0, i).trim(), back: t.slice(i + 1).trim(), note: '' });
+    }
+  });
+  return out.filter(r => r.front && r.back);
+}
+
+/* ---------- start ---------- */
+paintNav('home');
+render();
+bootAuth();
+window.addEventListener('pagehide', () => { flushProg(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushProg(); });
+
+</script>
+</body>
+</html>
