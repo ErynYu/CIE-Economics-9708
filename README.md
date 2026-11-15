@@ -1,13 +1,14 @@
 # 9708 Economics — Knowledge Self-Check
 
-A single-file, offline-capable study site for Cambridge International AS & A Level Economics (9708).
-Everything (questions, styles, logic) lives in `index.html`; there is no build step and no server.
+A study site for Cambridge International AS & A Level Economics (9708). Questions, styles and logic all live
+in `index.html`; the only external files are the official mark-scheme screenshots in `ms/`.
 
 ## What the site does
 
 - **MCQ practice** — 30-question sets, per-chapter filters, keyboard answering (A–D, Enter).
 - **Flashcards** — spaced-repetition boxes, only-due mode.
-- **Short answers** — typed responses with a self-check against model points.
+- **Short answers** — typed plan, then the official mark scheme shown as a screenshot of the published PDF, and you enter your own mark out of the total.
+- **Paper 2** — 65 data-response and essay questions (June 2026 v21–24, March 2026 v22), filed by topic; every mark scheme is an unedited screenshot of the official document.
 - **Progress** — attempts, accuracy, mastery per syllabus chapter.
 - **Question bank** — import questions from JSON, PDF or pasted text; edit, delete, re-file chapters; export the whole bank as JSON.
 - **Accounts** — optional Supabase sign-in for cross-device progress; guests can practise without saving.
@@ -15,11 +16,13 @@ Everything (questions, styles, logic) lives in `index.html`; there is no build s
 ## Deploying on GitHub Pages
 
 1. Create a public repository, e.g. `economics-9708`.
-2. Upload `index.html` (and this README) to the repository root, on the `main` branch.
+2. Upload `index.html`, the whole `ms/` folder and this README to the repository root, on the `main` branch.
+   Keep the folder name `ms` exactly — the page loads images as `ms/<name>.jpg`.
 3. Settings → Pages → Source: *Deploy from a branch*, branch `main`, folder `/ (root)`, Save.
 4. The site appears at `https://<your-user>.github.io/economics-9708/` within a minute or two.
 
 Updating the site: replace `index.html` with the new version and commit; Pages rebuilds automatically.
+Adding or replacing a mark scheme: drop the new `.jpg` into `ms/` and commit.
 
 ## Admin rights on this public copy
 
@@ -53,4 +56,3 @@ publish anything; nothing you import is uploaded anywhere.
 - Optional backend: run `supabase-schema.sql` in a Supabase project and paste the project URL plus the
   anon key in the app's backend dialog.
 - Typefaces load from a CDN; if that host is unreachable the page falls back to system serif/sans stacks.
-
